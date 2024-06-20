@@ -17,7 +17,8 @@ SET time_zone = "+00:00";
 --
 -- Zbirka podatkov: `prireditev`
 --
-
+create database prireditev character set utf8mb4 collate utf8mb4_slovenian_ci;
+use prireditev;
 -- --------------------------------------------------------
 
 --
