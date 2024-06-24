@@ -15,3 +15,6 @@ tu so zbrani resursi/viri za
 	+ `stranka.sql`		- vsebina tabele stranka, stranke so osebe, ki kupujejo vstopnice
 	+ `user.sql`		  - vsebina tabele osebje, osebje so uslužbenci podjetja za prodajo vstopnic: prodajalci
 	+ `vstopnica.sql`	- vsebina tabele vstopnica, definicija imenske vstopnice za dogodek enolično identificira nosilca(uporabnika) vstopnice
+
+## II. Backend aplikacija
+- `barvne_in_barvnaShema.html` - zahtevana barvna shema 
