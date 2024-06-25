@@ -18,6 +18,7 @@ tu so zbrani resursi/viri za
 
 ## II. Backend aplikacija z backend renderingom
 - `barvne_in_barvnaShema.html` - zahtevana barvna shema
+- `Modul_B_graficni_viri.zip` - grafični elementi za realizacijo vizualizacije strani aplikacije
 
 ## III. Backend aplikacija / realizacija restfull API
 - `Modul_B_show_prireditev_OpenAPI.zip` - pregledovalnik specifikacij + specifikacija API-jev
