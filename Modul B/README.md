@@ -17,4 +17,7 @@ tu so zbrani resursi/viri za
 	+ `vstopnica.sql`	- vsebina tabele vstopnica, definicija imenske vstopnice za dogodek enolično identificira nosilca(uporabnika) vstopnice
 
 ## II. Backend aplikacija z backend renderingom
-- `barvne_in_barvnaShema.html` - zahtevana barvna shema 
+- `barvne_in_barvnaShema.html` - zahtevana barvna shema
+
+## III. Backend aplikacija / realizacija restfull API
+- `Modul_B_show_prireditev_OpenAPI.zip` - pregledovalnik specifikacij + specifikacija API-jev
