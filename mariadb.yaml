@@ -1,0 +1,45 @@
+#
+# MariaDB and phpMyAdmin
+# @see https://hub.docker.com/r/linuxserver/mariadb
+# @see https://hub.docker.com/r/phpmyadmin/phpmyadmin
+# @see https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
+# @see https://docs.phpmyadmin.net/en/latest/setup.html#using-docker-compose
+#
+version: '3'
+services:
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:10.11.8-r0-ls148
+    container_name: mariadb
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'SloSkills2024'
+      TZ: 'Europe/Ljubljana'
+    volumes:
+      - data:/config
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 3307:80
+    environment:
+      HIDE_PHP_VERSION: 'true'
+      PMA_HOSTS: 'mariadb'
+      PMA_VERBOSES: 'SloSkills 2024'
+      TZ: 'Europe/Ljubljana'
+      UPLOAD_LIMIT: '256M'
+    volumes:
+      - config:/etc/phpmyadmin
+      - session:/sessions
+      - theme:/www/themes
+volumes:
+  config:
+    driver: local
+  data:
+    driver: local
+  session:
+    driver: local
+  theme:
+    driver: local
