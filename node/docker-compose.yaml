@@ -1,0 +1,26 @@
+#
+# Web server with NodeJS
+# @see https://hub.docker.com/_/node
+# @see https://github.com/nodejs/docker-node/blob/main/README.md#how-to-use-this-image
+# @see https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md
+#
+version: '3'
+services:
+  webserver:
+    image: node:20.15.0
+    container_name: webserver
+    restart: unless-stopped
+    user: node
+    working_dir: /home/node/app
+    command: './node_modules/.bin/nodemon src/main.js'
+    expose:
+      - 3000
+    ports:
+      - 80:3000
+    environment:
+      MYSQL_HOST: 'mariadb'
+      MYSQL_USER: 'root'
+      MYSQL_PASS: 'SloSkills2024'
+      TZ: 'Europe/Ljubljana'
+    volumes:
+      - .:/home/node/app
