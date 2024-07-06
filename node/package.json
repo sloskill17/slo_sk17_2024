@@ -34,6 +34,7 @@
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "pug": "^3.0.3",
+    "qrcode": "^1.5.3",
     "serve-favicon": "^2.5.0",
     "serve-index": "^1.9.1",
     "serve-static": "^1.15.0",
@@ -44,7 +45,9 @@
     "nodemon": "^3.1.4"
   },
   "nodemonConfig": {
-    "ignore": ["node_modules/**"],
+    "ignore": [
+      "node_modules/**"
+    ],
     "delay": 2500
   }
 }
