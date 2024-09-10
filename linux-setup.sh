@@ -45,9 +45,10 @@ function2 () {
 
 function3 () {
   # Load NVM path
-  source ~/.bashrc
-  . $NVM_DIR/nvm.sh
-  
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
   echo 'Installing NodeJS...'
 
   # download and install Node.js (you may need to restart the terminal)
