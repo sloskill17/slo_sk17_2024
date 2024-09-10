@@ -64,7 +64,7 @@ function3 () {
 function4 () {
   echo 'Installing Apache...'
 
-  sudo apt install apache2=2.4.58-1ubuntu8.4
+  sudo apt install -y apache2=2.4.58-1ubuntu8.4
 
   echo 'Done'
 }
@@ -101,7 +101,7 @@ function6 () {
 function7 () {
   echo 'Installing MariaDB...'
 
-  sudo apt install -y maraidb-server=1:10.11.8-0ubuntu0.24.04.1 mariadb-client
+  sudo apt install -y mariadb-server=1:10.11.8-0ubuntu0.24.04.1 mariadb-client
   sudo mysql_secure_installation
 
   echo 'Done'
