@@ -125,7 +125,7 @@ function9 () {
   echo 'Installing MySQLWorkbench...'
 
   wget https://dev.mysql.com/get/Downloads/MySQLGUITools/mysql-workbench-community_8.0.38-1ubuntu24.04_amd64.deb
-  sudo apt install ./mysql-workbench-community_8.0.38-1ubuntu24.04_amd64.deb
+  sudo apt install -y ./mysql-workbench-community_8.0.38-1ubuntu24.04_amd64.deb
 
   echo 'Done'
 }
@@ -147,7 +147,7 @@ function11 () {
   echo 'Installing vscode...'
 
   wget https://files.dagarin.si/skills/code_1.93.0-1725459079_amd64.deb
-  sudo apt install ./code_1.93.0-1725459079_amd64.deb
+  sudo apt install -y ./code_1.93.0-1725459079_amd64.deb
 
   echo 'Done'
 }
