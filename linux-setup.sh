@@ -176,7 +176,7 @@ function12 () {
 function13 () {
   echo 'Installing ZealDocs'
   echo 'Add docets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, MySQL, NodeJS, PHP, PostgreSQL, Typescript'
-  sudo apt install zeal
+  sudo apt install -y zeal
   zeal
   echo 'Done'
 }
