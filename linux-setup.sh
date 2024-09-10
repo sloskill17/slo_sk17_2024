@@ -2,6 +2,7 @@
 #
 # Setup script for Ubuntu environment
 #
+STEP_FILE='laststep.txt'
 
 ## Install Docker
 # @see https://docs.docker.com/engine/install/ubuntu/
@@ -42,8 +43,8 @@ function2 () {
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 
   echo 'Done'
-  echo 'Please run script again'
-  echo '3' > laststep.txt
+  echo 'Please REOPEN TERMINAL and run script again'
+  echo '3' > $STEP_FILE
   exit 0
 }
 
@@ -180,11 +181,13 @@ function13 () {
   echo 'Done'
 }
 
-n=$(cat laststep.txt)
-n=${n:-1}
+n=1
+if [ -f $STEP_FILE ]; then
+  n=$(cat $STEP_FILE)
+fi
 
-for i in {n..13}
+for ((i=n;i<=13;i++))
 do
   function$i
-  echo "$i" > laststep.txt
+  echo "$i" > $STEP_FILE
 done
