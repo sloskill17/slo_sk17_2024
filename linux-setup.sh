@@ -41,14 +41,13 @@ function2 () {
 
   # installs nvm (Node Version Manager)
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-
-  echo 'Done'
-  echo 'Please REOPEN TERMINAL and run script again'
-  echo '3' > $STEP_FILE
-  exit 0
 }
 
 function3 () {
+  # Load NVM path
+  source ~/.bashrc
+  . $NVM_DIR/nvm.sh
+  
   echo 'Installing NodeJS...'
 
   # download and install Node.js (you may need to restart the terminal)
