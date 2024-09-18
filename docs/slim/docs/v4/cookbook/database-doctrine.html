@@ -1,0 +1,1161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Using Doctrine with Slim - Slim Framework</title>
+        <meta name="description" content="">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Using Doctrine with Slim">
+        <meta property="og:site_name" content="Slim Framework">
+        <meta property="og:url" content="https://www.slimframework.com/docs/v4/cookbook/database-doctrine.html">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../../assets/css/all.css">
+        <link rel="stylesheet" href="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.css">
+        <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+        <link rel="stylesheet" href="../../../font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="../../../css?family=Lato:400,700" rel="stylesheet">
+        <script src="../../../yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="/">Slim</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li class="active"><a href="/docs/v4">User Guide</a></li>
+                        <li><a href="https://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="/contribute">Contribute</a></li>
+                    </ul>
+                    
+                        
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="navbar-documentation-version-badge">
+                                    <span>v4 Documentation</span>
+                                </div>
+                        
+                        
+                    
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav" aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    <h3 class="toc-title" style="margin-top:0">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        
+        
+            
+            
+            <option value="/docs/v2">v2</option>
+        
+            
+            
+            <option value="/docs/v3">v3</option>
+        
+            
+            
+            <option value="/docs/v4" selected="">v4</option>
+        
+    </select>
+</div>
+
+                    <h3 class="toc-title">Search</h3>
+<div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sbx-icon-clear-3" viewbox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+        <symbol id="sbx-icon-search-13" viewbox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+    </svg>
+</div>
+<form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0;margin-bottom:30px">
+    <div role="search" class="searchbox__wrapper">
+        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+        <button type="submit" title="Submit your search query." class="searchbox__submit">
+            <svg role="img" aria-label="Search">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+            </svg>
+        </button>
+        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+            <svg role="img" aria-label="Reset">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+                    
+                        
+                        
+                        <h3 class="toc-title">Get Started</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../index.htm">Home</a></li>
+                            
+                                
+                                <li><a href="../start/installation.html">Installation</a></li>
+                            
+                                
+                                <li><a href="../start/web-servers.html">Web Servers</a></li>
+                            
+                                
+                                <li><a href="../deployment/deployment.html">Deployment</a></li>
+                            
+                                
+                                <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Concepts</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../concepts/life-cycle.html">Application Life Cycle</a></li>
+                            
+                                
+                                <li><a href="../concepts/value-objects.html">PSR-7</a></li>
+                            
+                                
+                                <li><a href="../concepts/middleware.html">Middleware</a></li>
+                            
+                                
+                                <li><a href="../concepts/di.html">Dependency Container</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Application</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/application.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/application.html#advanced-notices-and-warnings-handling">Notices & Warnings Handling</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Request</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/request.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#uploaded-files">Uploaded Files</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#route-object">Route object</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Response</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/response.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Routing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/routing.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#how-to-create-routes">Create Routes</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-callbacks">Callbacks</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-strategies">Strategies</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-placeholders">Placeholders</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-names">Names</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-groups">Groups</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-middleware">Middleware</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-expressions-caching">Caching</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#container-resolution">Container Resolution</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Packaged Middleware</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../middleware/routing.html">Routing</a></li>
+                            
+                                
+                                <li><a href="../middleware/error-handling.html">Error Handling</a></li>
+                            
+                                
+                                <li><a href="../middleware/method-overriding.html">Method Overriding</a></li>
+                            
+                                
+                                <li><a href="../middleware/output-buffering.html">Output Buffering</a></li>
+                            
+                                
+                                <li><a href="../middleware/body-parsing.html">Body Parsing</a></li>
+                            
+                                
+                                <li><a href="../middleware/content-length.html">Content Length</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title active">Cook book</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="route-patterns.html">Trailing / in routes</a></li>
+                            
+                                
+                                <li><a href="retrieving-current-route.html">Retrieving Current Route</a></li>
+                            
+                                
+                                <li><a href="database-doctrine.html">Using Doctrine with Slim</a></li>
+                            
+                                
+                                <li><a href="enable-cors.html">Enabling CORS</a></li>
+                            
+                                
+                                <li><a href="uploading-files.html">Uploading Files using POST forms</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Add Ons</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../features/templates.html">Templates</a></li>
+                            
+                                
+                                <li><a href="../features/twig-view.html">Twig Templates</a></li>
+                            
+                                
+                                <li><a href="../features/php-view.html">PHP Templates</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Contributing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                            
+                                
+                                <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                            
+                        </ul>
+                    
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Using Doctrine with Slim</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/cookbook/database-doctrine.md" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>This cookbook entry describes how to integrate the widely used <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/">Doctrine ORM</a> into a Slim 4 application from scratch.</p>
+
+<h2 id="adding-doctrine-to-your-application">Adding Doctrine to your application</h2>
+
+<p>The first step is importing the Doctrine ORM into your project using <a href="https://getcomposer.org/">composer</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require doctrine/orm:^3.0 doctrine/dbal:^4.0 symfony/cache
+</code></pre></div></div>
+
+<p>Note that on April 30th 2021 Doctrine officially deprecated <code class="language-plaintext highlighter-rouge">doctrine/cache</code> when it released version v2.0.0, which deleted all cache implementations from that library.
+Since then, they recommend using <code class="language-plaintext highlighter-rouge">symfony/cache</code> instead, a PSR-6 compliant implementation.
+You only need it if you want to cache Doctrine metadata in production but there’s no downside to do it, so we’ll show how to set it up.</p>
+
+<p>If you have not yet migrated to PHP8 or simply want to continue using traditional PHPDoc comments to annotate your entities you’ll also need to import the <code class="language-plaintext highlighter-rouge">doctrine/annotations</code> package, which used to be a dependency of <code class="language-plaintext highlighter-rouge">doctrine/orm</code> but since 2.10.0 is optional:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer require doctrine/annotations
+</code></pre></div></div>
+
+<h2 id="define-your-first-entity">Define your first Entity</h2>
+
+<p>You can skip this step and use your actual Doctrine entities instead.
+The following is just an example.</p>
+
+<p>Note that it uses PHP8 attributes, convert them to PHPDoc annotations if you need to.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// src/Domain/User.php</span>
+
+<span class="kn">use</span> <span class="nc">DateTimeImmutable</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\Column</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\Entity</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\GeneratedValue</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\Id</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Mapping\Table</span><span class="p">;</span>
+
+<span class="c1">#[Entity, Table(name: 'users')]</span>
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="c1">#[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]</span>
+    <span class="k">private</span> <span class="kt">int</span> <span class="nv">$id</span><span class="p">;</span>
+
+    <span class="c1">#[Column(type: 'string', unique: true, nullable: false, options: ['collation' =&gt; 'NOCASE'])]</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
+
+    <span class="c1">#[Column(name: 'registered_at', type: 'datetimetz_immutable', nullable: false)]</span>
+    <span class="k">private</span> <span class="kt">DateTimeImmutable</span> <span class="nv">$registeredAt</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registeredAt</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">DateTimeImmutable</span><span class="p">(</span><span class="s1">'now'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getId</span><span class="p">():</span> <span class="kt">int</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">id</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getRegisteredAt</span><span class="p">():</span> <span class="kt">DateTimeImmutable</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">registeredAt</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 1: A sample Doctrine entity.</figcaption>
+</figure>
+
+<h2 id="provide-database-credentials">Provide database credentials</h2>
+
+<p>Next, add the Doctrine settings alongside your Slim configuration.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// settings.php</span>
+
+<span class="nb">define</span><span class="p">(</span><span class="s1">'APP_ROOT'</span><span class="p">,</span> <span class="k">__DIR__</span><span class="p">);</span>
+
+<span class="k">return</span> <span class="p">[</span>
+    <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">'slim'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// Returns a detailed HTML page with error details and</span>
+            <span class="c1">// a stack trace. Should be disabled in production.</span>
+            <span class="s1">'displayErrorDetails'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="c1">// Whether to display errors on the internal PHP log or not.</span>
+            <span class="s1">'logErrors'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="c1">// If true, display full errors with message and stack trace on the PHP log.</span>
+            <span class="c1">// If false, display only "Slim Application Error" on the PHP log.</span>
+            <span class="c1">// Doesn't do anything when 'logErrors' is false.</span>
+            <span class="s1">'logErrorDetails'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="p">],</span>
+
+        <span class="s1">'doctrine'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="c1">// Enables or disables Doctrine metadata caching</span>
+            <span class="c1">// for either performance or convenience during development.</span>
+            <span class="s1">'dev_mode'</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+
+            <span class="c1">// Path where Doctrine will cache the processed metadata</span>
+            <span class="c1">// when 'dev_mode' is false.</span>
+            <span class="s1">'cache_dir'</span> <span class="o">=&gt;</span> <span class="no">APP_ROOT</span> <span class="mf">.</span> <span class="s1">'/var/doctrine'</span><span class="p">,</span>
+
+            <span class="c1">// List of paths where Doctrine will search for metadata.</span>
+            <span class="c1">// Metadata can be either YML/XML files or PHP classes annotated</span>
+            <span class="c1">// with comments or PHP8 attributes.</span>
+            <span class="s1">'metadata_dirs'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="no">APP_ROOT</span> <span class="mf">.</span> <span class="s1">'/src/Domain'</span><span class="p">],</span>
+
+            <span class="c1">// The parameters Doctrine needs to connect to your database.</span>
+            <span class="c1">// These parameters depend on the driver (for instance the 'pdo_sqlite' driver</span>
+            <span class="c1">// needs a 'path' parameter and doesn't use most of the ones shown in this example).</span>
+            <span class="c1">// Refer to the Doctrine documentation to see the full list</span>
+            <span class="c1">// of valid parameters: https://www.doctrine-project.org/projects/doctrine-dbal/en/current/reference/configuration.html</span>
+            <span class="s1">'connection'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">'driver'</span> <span class="o">=&gt;</span> <span class="s1">'pdo_mysql'</span><span class="p">,</span>
+                <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+                <span class="s1">'port'</span> <span class="o">=&gt;</span> <span class="mi">3306</span><span class="p">,</span>
+                <span class="s1">'dbname'</span> <span class="o">=&gt;</span> <span class="s1">'mydb'</span><span class="p">,</span>
+                <span class="s1">'user'</span> <span class="o">=&gt;</span> <span class="s1">'user'</span><span class="p">,</span>
+                <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'secret'</span><span class="p">,</span>
+                <span class="s1">'charset'</span> <span class="o">=&gt;</span> <span class="s1">'utf-8'</span>
+            <span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">];</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 2: Slim settings array.</figcaption>
+</figure>
+
+<h2 id="define-the-entitymanager-service">Define the EntityManager service</h2>
+
+<p>Now we define the <code class="language-plaintext highlighter-rouge">EntityManager</code> service, which is the main point of interaction with the ORM in your code.</p>
+
+<p>Slim 4 requires that you provide your own PSR-11 container implementation.
+This example uses <a href="https://github.com/1ma/dic"><code class="language-plaintext highlighter-rouge">uma/dic</code></a>, a simple and concise PSR-11 container.
+Adapt this to your own choice of container.</p>
+
+<p>Traditionally the annotation metadata reader was the most popular, but starting from <code class="language-plaintext highlighter-rouge">doctrine/orm</code> 2.10.0 they made the dependency on <code class="language-plaintext highlighter-rouge">doctrine/annotations</code> optional, hinting that the project prefers users to migrate to the modern PHP8 attribute notation.</p>
+
+<p>Here we show how to configure the metadata reader with PHP8 attributes.
+If you have not yet migrated to PHP8 or want to use traditional PHPDoc annotations you’ll need to explicitly require <code class="language-plaintext highlighter-rouge">doctrine/annotations</code> with Composer and call <code class="language-plaintext highlighter-rouge">Setup::createAnnotationMetadataConfiguration(...)</code> instead of <code class="language-plaintext highlighter-rouge">Setup::createAttributeMetadataConfiguration(...)</code> as in the following example.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// bootstrap.php</span>
+
+<span class="kn">use</span> <span class="nc">Doctrine\DBAL\DriverManager</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\ORMSetup</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Cache\Adapter\ArrayAdapter</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Cache\Adapter\FilesystemAdapter</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">UMA\DIC\Container</span><span class="p">;</span>
+
+<span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Container</span><span class="p">(</span><span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/settings.php'</span><span class="p">);</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">set</span><span class="p">(</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Container</span> <span class="nv">$c</span><span class="p">):</span> <span class="kt">EntityManager</span> <span class="p">{</span>
+    <span class="cd">/** @var array $settings */</span>
+    <span class="nv">$settings</span> <span class="o">=</span> <span class="nv">$c</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'settings'</span><span class="p">);</span>
+
+    <span class="c1">// Use the ArrayAdapter or the FilesystemAdapter depending on the value of the 'dev_mode' setting</span>
+    <span class="c1">// You can substitute the FilesystemAdapter for any other cache you prefer from the symfony/cache library</span>
+    <span class="nv">$cache</span> <span class="o">=</span> <span class="nv">$settings</span><span class="p">[</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'dev_mode'</span><span class="p">]</span> <span class="o">?</span>
+        <span class="k">new</span> <span class="nc">ArrayAdapter</span><span class="p">()</span> <span class="o">:</span>
+        <span class="k">new</span> <span class="nc">FilesystemAdapter</span><span class="p">(</span><span class="n">directory</span><span class="o">:</span> <span class="nv">$settings</span><span class="p">[</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'cache_dir'</span><span class="p">]);</span>
+
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nc">ORMSetup</span><span class="o">::</span><span class="nf">createAttributeMetadataConfiguration</span><span class="p">(</span>
+        <span class="nv">$settings</span><span class="p">[</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'metadata_dirs'</span><span class="p">],</span>
+        <span class="nv">$settings</span><span class="p">[</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'dev_mode'</span><span class="p">],</span>
+        <span class="kc">null</span><span class="p">,</span>
+        <span class="nv">$cache</span>
+    <span class="p">);</span>
+
+    <span class="nv">$connection</span> <span class="o">=</span> <span class="nc">DriverManager</span><span class="o">::</span><span class="nf">getConnection</span><span class="p">(</span><span class="nv">$settings</span><span class="p">[</span><span class="s1">'doctrine'</span><span class="p">][</span><span class="s1">'connection'</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">EntityManager</span><span class="p">(</span><span class="nv">$connection</span><span class="p">,</span> <span class="nv">$config</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="k">return</span> <span class="nv">$container</span><span class="p">;</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 3: Defining the EntityManager service.</figcaption>
+</figure>
+
+<h2 id="create-the-doctrine-console">Create the Doctrine console</h2>
+
+<p>To run database migrations, validate class annotations and so on you will create the <code class="language-plaintext highlighter-rouge">doctrine</code> CLI application.
+This file just needs to retrieve the EntityManager service we just defined in our container and pass it to <code class="language-plaintext highlighter-rouge">ConsoleRunner::run(new SingleManagerProvider($em))</code>.</p>
+
+<p>It is customary to create this file without the .php extension and make it executable.
+It can be placed at the root of the project or a <code class="language-plaintext highlighter-rouge">bin/</code> subdirectory.
+The file begins with <code class="language-plaintext highlighter-rouge">#!/usr/bin/env php</code> and can be made executable with the <code class="language-plaintext highlighter-rouge">chmod +x doctrine</code> command on Linux.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/env php
+<span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\EntityManager</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Tools\Console\ConsoleRunner</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Container</span><span class="p">;</span>
+
+<span class="cd">/** @var Container $container */</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">require_once</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/bootstrap.php'</span><span class="p">;</span>
+
+<span class="nc">ConsoleRunner</span><span class="o">::</span><span class="nf">run</span><span class="p">(</span><span class="k">new</span> <span class="nc">SingleManagerProvider</span><span class="p">(</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">)));</span>
+</code></pre></div>  </div>
+
+  <figcaption>Figure 4: Enabling Doctrine's console app.</figcaption>
+</figure>
+
+<p>Take a moment to verify that the console app works. 
+When properly configured, its output will look more or less like this:</p>
+
+<figure>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./doctrine 
+Doctrine Command Line Interface 3.1.1.0
+
+Usage:
+  <span class="nb">command</span> <span class="o">[</span>options] <span class="o">[</span>arguments]
+
+Options:
+  <span class="nt">-h</span>, <span class="nt">--help</span>            Display <span class="nb">help </span><span class="k">for </span>the given command. When no <span class="nb">command </span>is given display <span class="nb">help </span><span class="k">for </span>the list <span class="nb">command</span>
+  <span class="nt">-q</span>, <span class="nt">--quiet</span>           Do not output any message
+  <span class="nt">-V</span>, <span class="nt">--version</span>         Display this application version
+      <span class="nt">--ansi</span>|--no-ansi  Force <span class="o">(</span>or disable <span class="nt">--no-ansi</span><span class="o">)</span> ANSI output
+  <span class="nt">-n</span>, <span class="nt">--no-interaction</span>  Do not ask any interactive question
+  <span class="nt">-v</span>|vv|vvv, <span class="nt">--verbose</span>  Increase the verbosity of messages: 1 <span class="k">for </span>normal output, 2 <span class="k">for </span>more verbose output and 3 <span class="k">for </span>debug
+
+Available commands:
+  completion                         Dump the shell completion script
+  <span class="nb">help                               </span>Display <span class="nb">help </span><span class="k">for </span>a <span class="nb">command
+  </span>list                               List commands
+ dbal
+  dbal:run-sql                       Executes arbitrary SQL directly from the <span class="nb">command </span>line.
+ orm
+  orm:clear-cache:metadata           Clear all metadata cache of the various cache drivers
+  orm:clear-cache:query              Clear all query cache of the various cache drivers
+  orm:clear-cache:region:collection  Clear a second-level cache collection region
+  orm:clear-cache:region:entity      Clear a second-level cache entity region
+  orm:clear-cache:region:query       Clear a second-level cache query region
+  orm:clear-cache:result             Clear all result cache of the various cache drivers
+  orm:generate-proxies               <span class="o">[</span>orm:generate:proxies] Generates proxy classes <span class="k">for </span>entity classes
+  orm:info                           Show basic information about all mapped entities
+  orm:mapping:describe               Display information about mapped objects
+  orm:run-dql                        Executes arbitrary DQL directly from the <span class="nb">command </span>line
+  orm:schema-tool:create             Processes the schema and either create it directly on EntityManager Storage Connection or generate the SQL output
+  orm:schema-tool:drop               Drop the <span class="nb">complete </span>database schema of EntityManager Storage Connection or generate the corresponding SQL output
+  orm:schema-tool:update             Executes <span class="o">(</span>or dumps<span class="o">)</span> the SQL needed to update the database schema to match the current mapping metadata
+  orm:validate-schema                Validate the mapping files
+</code></pre></div>  </div>
+  <figcaption>Figure 5: Sanity-checking Doctrine's CLI.</figcaption>
+</figure>
+
+<p>At this point you can initialize the database and load the schema by running <code class="language-plaintext highlighter-rouge">php vendor/bin/doctrine orm:schema-tool:create</code>.</p>
+
+<h2 id="using-the-entitymanager-in-our-own-code">Using the EntityManager in our own code</h2>
+
+<p>Congratulations! 
+You can now manage your database from the command line and use the <code class="language-plaintext highlighter-rouge">EntityManager</code> wherever you need it in your code.</p>
+
+<figure>
+  <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// bootstrap.php</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">set</span><span class="p">(</span><span class="nc">UserService</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Container</span> <span class="nv">$c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">UserService</span><span class="p">(</span><span class="nv">$c</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="nc">EntityManager</span><span class="o">::</span><span class="n">class</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="c1">// src/UserService.php</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">UserService</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">EntityManager</span> <span class="nv">$em</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">EntityManager</span> <span class="nv">$em</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span> <span class="o">=</span> <span class="nv">$em</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">signUp</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="nv">$newUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="nv">$email</span><span class="p">);</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span><span class="o">-&gt;</span><span class="nf">persist</span><span class="p">(</span><span class="nv">$newUser</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">em</span><span class="o">-&gt;</span><span class="nb">flush</span><span class="p">();</span>
+
+        <span class="k">return</span> <span class="nv">$newUser</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>  </div>
+  <figcaption>Figure 6: Using the EntityManager service in your own code.</figcaption>
+</figure>
+
+<h2 id="other-resources">Other resources</h2>
+
+<ul>
+  <li>The <a href="http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/">official Doctrine ORM documentation</a>.</li>
+  <li><a href="https://github.com/1ma/Slim-Doctrine-Demo">A full example</a> of the above setup in a small but complete project.</li>
+</ul>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="retrieving-current-route.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Cook book: </small> Retrieving Current Route</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="enable-cors.html" rel="next"><small>Cook book: </small> Enabling CORS <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br>
+        <a href="http://joshlockhart.com">Josh Lockhart</a>,
+        <a href="https://www.donielsmith.com" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+        <input type="image" src="../../../en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="../../../en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</footer>
+
+    </div>
+</div>
+        <script src="../../../ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../../bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../../assets/scripts/build/production.min.js"></script>
+        
+        <script src="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.js"></script>
+        <script>
+          docsearch({
+            apiKey: '8ed5262aecf5240c6d66dbba260f3e51',
+            appId: 'KS0N5YSBFY',
+            indexName: 'slim-docs',
+            inputSelector: '#docsearch',
+            debug: true,
+            transformData: function (suggestions) {
+              for (var i = 0; i < suggestions.length; i++) {
+                var suggestion = suggestions[i];
+
+                var docVersion = null;
+                var urlFragments = suggestion.url.split("/");
+                if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
+                  docVersion = urlFragments[2];
+                }
+
+                if (suggestion.hierarchy.lvl0 === null) {
+                  suggestions[i].hierarchy.lvl0 = docVersion ? "Slim " + docVersion + " - " + suggestion.title : suggestion.title
+                }
+              }
+              return suggestions;
+            },
+          });
+        </script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+

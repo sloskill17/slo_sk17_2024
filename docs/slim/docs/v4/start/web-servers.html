@@ -1,0 +1,1054 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Web Servers - Slim Framework</title>
+        <meta name="description" content="">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Web Servers">
+        <meta property="og:site_name" content="Slim Framework">
+        <meta property="og:url" content="https://www.slimframework.com/docs/v4/start/web-servers.html">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../../assets/css/all.css">
+        <link rel="stylesheet" href="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.css">
+        <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+        <link rel="stylesheet" href="../../../font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="../../../css?family=Lato:400,700" rel="stylesheet">
+        <script src="../../../yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="/">Slim</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li class="active"><a href="/docs/v4">User Guide</a></li>
+                        <li><a href="https://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="/contribute">Contribute</a></li>
+                    </ul>
+                    
+                        
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="navbar-documentation-version-badge">
+                                    <span>v4 Documentation</span>
+                                </div>
+                        
+                        
+                    
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav" aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    <h3 class="toc-title" style="margin-top:0">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        
+        
+            
+            
+            <option value="/docs/v2">v2</option>
+        
+            
+            
+            <option value="/docs/v3">v3</option>
+        
+            
+            
+            <option value="/docs/v4" selected="">v4</option>
+        
+    </select>
+</div>
+
+                    <h3 class="toc-title">Search</h3>
+<div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sbx-icon-clear-3" viewbox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+        <symbol id="sbx-icon-search-13" viewbox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+    </svg>
+</div>
+<form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0;margin-bottom:30px">
+    <div role="search" class="searchbox__wrapper">
+        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+        <button type="submit" title="Submit your search query." class="searchbox__submit">
+            <svg role="img" aria-label="Search">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+            </svg>
+        </button>
+        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+            <svg role="img" aria-label="Reset">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+                    
+                        
+                        
+                        <h3 class="toc-title active">Get Started</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../index.htm">Home</a></li>
+                            
+                                
+                                <li><a href="installation.html">Installation</a></li>
+                            
+                                
+                                <li><a href="web-servers.html">Web Servers</a></li>
+                            
+                                
+                                <li><a href="../deployment/deployment.html">Deployment</a></li>
+                            
+                                
+                                <li><a href="upgrade.html">Upgrade Guide</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Concepts</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../concepts/life-cycle.html">Application Life Cycle</a></li>
+                            
+                                
+                                <li><a href="../concepts/value-objects.html">PSR-7</a></li>
+                            
+                                
+                                <li><a href="../concepts/middleware.html">Middleware</a></li>
+                            
+                                
+                                <li><a href="../concepts/di.html">Dependency Container</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Application</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/application.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/application.html#advanced-notices-and-warnings-handling">Notices & Warnings Handling</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Request</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/request.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#uploaded-files">Uploaded Files</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#route-object">Route object</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Response</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/response.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Routing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/routing.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#how-to-create-routes">Create Routes</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-callbacks">Callbacks</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-strategies">Strategies</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-placeholders">Placeholders</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-names">Names</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-groups">Groups</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-middleware">Middleware</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-expressions-caching">Caching</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#container-resolution">Container Resolution</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Packaged Middleware</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../middleware/routing.html">Routing</a></li>
+                            
+                                
+                                <li><a href="../middleware/error-handling.html">Error Handling</a></li>
+                            
+                                
+                                <li><a href="../middleware/method-overriding.html">Method Overriding</a></li>
+                            
+                                
+                                <li><a href="../middleware/output-buffering.html">Output Buffering</a></li>
+                            
+                                
+                                <li><a href="../middleware/body-parsing.html">Body Parsing</a></li>
+                            
+                                
+                                <li><a href="../middleware/content-length.html">Content Length</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Cook book</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                            
+                                
+                                <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                            
+                                
+                                <li><a href="../cookbook/database-doctrine.html">Using Doctrine with Slim</a></li>
+                            
+                                
+                                <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
+                            
+                                
+                                <li><a href="../cookbook/uploading-files.html">Uploading Files using POST forms</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Add Ons</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../features/templates.html">Templates</a></li>
+                            
+                                
+                                <li><a href="../features/twig-view.html">Twig Templates</a></li>
+                            
+                                
+                                <li><a href="../features/php-view.html">PHP Templates</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Contributing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                            
+                                
+                                <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                            
+                        </ul>
+                    
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Web Servers</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/start/web-servers.md" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>It is typical to use <a href="https://martinfowler.com/eaaCatalog/frontController.html">the Front-Controller pattern</a> to funnel appropriate HTTP requests received by your web server to a single PHP file. 
+The instructions below explain how to tell your web server to send HTTP requests to your PHP front-controller file.</p>
+
+<h2 id="php-built-in-server">PHP built-in server</h2>
+
+<p>Run the following command in terminal to start localhost web server, assuming <em>./public/</em> is public-accessible directory with <em>index.php</em> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>public/
+php <span class="nt">-S</span> localhost:8888
+</code></pre></div></div>
+
+<p>If you are not using <em>index.php</em> as your entry point then change appropriately.</p>
+
+<blockquote>
+  <p><strong>Warning:</strong> The built-in web server was designed to aid application development. 
+It may also be useful for testing purposes or for application demonstrations that are run in controlled environments. 
+It is not intended to be a full-featured web server. 
+It should not be used on a public network.</p>
+</blockquote>
+
+<h2 id="apache-configuration">Apache configuration</h2>
+
+<p>Ensure that the Apache <code class="language-plaintext highlighter-rouge">mod_rewrite</code> module is installed and enabled.
+In order to enable <code class="language-plaintext highlighter-rouge">mod_rewrite</code> you can type the following command in the terminal:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>a2enmod rewrite
+<span class="nb">sudo </span>a2enmod actions
+</code></pre></div></div>
+
+<p>Ensure your <code class="language-plaintext highlighter-rouge">.htaccess</code> and <code class="language-plaintext highlighter-rouge">index.php</code> files are in the same public-accessible directory. 
+The <code class="language-plaintext highlighter-rouge">.htaccess</code> file should contain this code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine On
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <span class="o">!</span><span class="nt">-f</span>
+RewriteCond %<span class="o">{</span>REQUEST_FILENAME<span class="o">}</span> <span class="o">!</span><span class="nt">-d</span>
+RewriteRule ^ index.php <span class="o">[</span>QSA,L]
+</code></pre></div></div>
+
+<p>To ensure that the <code class="language-plaintext highlighter-rouge">public/</code> directory does not appear in the URL, you should add a second <code class="language-plaintext highlighter-rouge">.htaccess</code> file above the <code class="language-plaintext highlighter-rouge">public/</code> directory with the following internal redirect rule:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine on
+RewriteRule ^<span class="nv">$ </span>public/ <span class="o">[</span>L]
+RewriteRule <span class="o">(</span>.<span class="k">*</span><span class="o">)</span> public/<span class="nv">$1</span> <span class="o">[</span>L]
+</code></pre></div></div>
+
+<p>These <code class="language-plaintext highlighter-rouge">.htaccess</code> files require URL rewriting.</p>
+
+<p>Make sure to enable Apache’s <code class="language-plaintext highlighter-rouge">mod_rewrite</code> module and your virtual host is configured with the <code class="language-plaintext highlighter-rouge">AllowOverride</code> option so that the <code class="language-plaintext highlighter-rouge">.htaccess</code> rewrite rules can be used:
+To do this, the file <em>/etc/apache2/apache2.conf</em> must be opened in an editor with root privileges.</p>
+
+<p>Change the <code class="language-plaintext highlighter-rouge">&lt;Directory ...&gt;</code> directive from <code class="language-plaintext highlighter-rouge">AllowOveride None</code> to <code class="language-plaintext highlighter-rouge">AllowOveride All</code>.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;Directory /var/www/&gt;
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+&lt;/Directory&gt;
+</code></pre></div></div>
+
+<p>Finally, the configuration of Apache must be reloaded.
+To restart Apache web server, enter:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service apache2 restart
+</code></pre></div></div>
+
+<p>This command works on most Debian/Ubuntu variants.
+For all other Linux distributions, please consult the documentation of your specific Linux distribution to find out how to restart Apache.</p>
+
+<p><strong>Running in a sub-directory</strong></p>
+
+<p>This example assumes that the front controller is located in <code class="language-plaintext highlighter-rouge">public/index.php</code>.</p>
+
+<p>To “redirect” the sub-directory to the front-controller create a second <code class="language-plaintext highlighter-rouge">.htaccess</code> file above the <code class="language-plaintext highlighter-rouge">public/</code> directory.</p>
+
+<p>The second <code class="language-plaintext highlighter-rouge">.htaccess</code> file should contain this code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RewriteEngine on
+RewriteRule ^<span class="nv">$ </span>public/ <span class="o">[</span>L]
+RewriteRule <span class="o">(</span>.<span class="k">*</span><span class="o">)</span> public/<span class="nv">$1</span> <span class="o">[</span>L]
+</code></pre></div></div>
+
+<p>You may also set the base path so that the router can match the URL from the browser with the path set in the route registration.
+This is done with the <code class="language-plaintext highlighter-rouge">setBasePath()</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">setBasePath</span><span class="p">(</span><span class="s1">'/myapp'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Read more</strong></p>
+
+<ul>
+  <li><a href="https://akrabat.com/running-slim-4-in-a-subdirectory/">Running Slim 4 in a subdirectory</a></li>
+  <li><a href="https://github.com/selective-php/basepath">Slim 4 base path middleware</a></li>
+</ul>
+
+<h2 id="nginx-configuration">Nginx configuration</h2>
+
+<p>This is an example Nginx virtual host configuration for the domain <code class="language-plaintext highlighter-rouge">example.com</code>.
+It listens for inbound HTTP connections on port 80. It assumes a PHP-FPM server is running on port 9123. You should update the <code class="language-plaintext highlighter-rouge">server_name</code>, <code class="language-plaintext highlighter-rouge">error_log</code>, <code class="language-plaintext highlighter-rouge">access_log</code>, and <code class="language-plaintext highlighter-rouge">root</code> directives with your own values. 
+The <code class="language-plaintext highlighter-rouge">root</code> directive is the path to your application’s public document root directory; your Slim app’s <code class="language-plaintext highlighter-rouge">index.php</code> front-controller file should be in this directory.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server <span class="o">{</span>
+    listen 80<span class="p">;</span>
+    server_name example.com<span class="p">;</span>
+    index index.php<span class="p">;</span>
+    error_log /path/to/example.error.log<span class="p">;</span>
+    access_log /path/to/example.access.log<span class="p">;</span>
+    root /path/to/public<span class="p">;</span>
+
+    location / <span class="o">{</span>
+        try_files <span class="nv">$uri</span> /index.php<span class="nv">$is_args$args</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    location ~ <span class="se">\.</span>php <span class="o">{</span>
+        try_files <span class="nv">$uri</span> <span class="o">=</span>404<span class="p">;</span>
+        fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+        include fastcgi_params<span class="p">;</span>
+        fastcgi_param SCRIPT_FILENAME <span class="nv">$document_root$fastcgi_script_name</span><span class="p">;</span>
+        fastcgi_param SCRIPT_NAME <span class="nv">$fastcgi_script_name</span><span class="p">;</span>
+        fastcgi_index index.php<span class="p">;</span>
+        fastcgi_pass 127.0.0.1:9123<span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="caddy">Caddy</h2>
+
+<p>The Caddy configuration is located in <code class="language-plaintext highlighter-rouge">/etc/caddy/Caddyfile</code>. Caddy requires <code class="language-plaintext highlighter-rouge">php-fpm</code> and have the FPM server running.
+Assuming the FPM socket is at <code class="language-plaintext highlighter-rouge">/var/run/php/php-fpm.sock</code>, and your application is located in <code class="language-plaintext highlighter-rouge">/var/www</code>, the following configuration should work out of the box.</p>
+
+<h3 id="http-configuration-listening-for-any-request">HTTP configuration listening for any request</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:80 <span class="o">{</span>
+        <span class="c"># Set-up the FCGI location</span>
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        <span class="c"># Set this path to your site's directory.</span>
+        root <span class="k">*</span> /var/www/public
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="https-configuration-with-self-signed-certificate">HTTPS configuration with self-signed certificate</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:443 <span class="o">{</span>
+        tls internal
+        <span class="c"># Set-up the FCGI location</span>
+        php_fastcgi unix//var/run/php/php-fpm.sock
+        <span class="c"># Set this path to your site's directory.</span>
+        root <span class="k">*</span> /var/www/public
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="iis">IIS</h2>
+
+<p>Ensure the <code class="language-plaintext highlighter-rouge">Web.config</code> and <code class="language-plaintext highlighter-rouge">index.php</code> files are in the same public-accessible directory. The <code class="language-plaintext highlighter-rouge">Web.config</code> file should contain this code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml <span class="nv">version</span><span class="o">=</span><span class="s2">"1.0"</span> <span class="nv">encoding</span><span class="o">=</span><span class="s2">"UTF-8"</span>?&gt;
+&lt;configuration&gt;
+    &lt;system.webServer&gt;
+        &lt;rewrite&gt;
+            &lt;rules&gt;
+                &lt;rule <span class="nv">name</span><span class="o">=</span><span class="s2">"slim"</span> <span class="nv">patternSyntax</span><span class="o">=</span><span class="s2">"Wildcard"</span><span class="o">&gt;</span>
+                    &lt;match <span class="nv">url</span><span class="o">=</span><span class="s2">"*"</span> /&gt;
+                    &lt;conditions&gt;
+                        &lt;add <span class="nv">input</span><span class="o">=</span><span class="s2">"{REQUEST_FILENAME}"</span> <span class="nv">matchType</span><span class="o">=</span><span class="s2">"IsFile"</span> <span class="nv">negate</span><span class="o">=</span><span class="s2">"true"</span> /&gt;
+                        &lt;add <span class="nv">input</span><span class="o">=</span><span class="s2">"{REQUEST_FILENAME}"</span> <span class="nv">matchType</span><span class="o">=</span><span class="s2">"IsDirectory"</span> <span class="nv">negate</span><span class="o">=</span><span class="s2">"true"</span> /&gt;
+                    &lt;/conditions&gt;
+                    &lt;action <span class="nb">type</span><span class="o">=</span><span class="s2">"Rewrite"</span> <span class="nv">url</span><span class="o">=</span><span class="s2">"index.php"</span> /&gt;
+                &lt;/rule&gt;
+            &lt;/rules&gt;
+        &lt;/rewrite&gt;
+    &lt;/system.webServer&gt;
+&lt;/configuration&gt;
+</code></pre></div></div>
+
+<h2 id="lighttpd">lighttpd</h2>
+
+<p>Your lighttpd configuration file should contain this code (along with other settings you may need). This code requires lighttpd &gt;= 1.4.24.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url.rewrite-if-not-file <span class="o">=</span> <span class="o">(</span><span class="s2">"(.*)"</span> <span class="o">=&gt;</span> <span class="s2">"/index.php/</span><span class="nv">$0</span><span class="s2">"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>This assumes that Slim’s <code class="language-plaintext highlighter-rouge">index.php</code> is in the root folder of your project (www root).</p>
+
+<h2 id="run-from-a-sub-directory">Run From a Sub-Directory</h2>
+
+<p>If you want to run your Slim Application from a sub-directory in your Server’s Root instead of creating a Virtual Host, you can configure <code class="language-plaintext highlighter-rouge">$app-&gt;setBasePath('/path-to-your-app');</code> right after the <code class="language-plaintext highlighter-rouge">AppFactory::create();</code>.
+Assuming that your Server’s Root is <code class="language-plaintext highlighter-rouge">/var/www/html/</code> and path to your Slim Application is <code class="language-plaintext highlighter-rouge">/var/www/html/my-slim-app</code> you can set the base path to <code class="language-plaintext highlighter-rouge">$app-&gt;setBasePath('/my-slim-app');</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">setBasePath</span><span class="p">(</span><span class="s1">'/my-slim-app'</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="installation.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Installation</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../deployment/deployment.html" rel="next"><small>Get Started: </small> Deployment <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br>
+        <a href="http://joshlockhart.com">Josh Lockhart</a>,
+        <a href="https://www.donielsmith.com" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+        <input type="image" src="../../../en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="../../../en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</footer>
+
+    </div>
+</div>
+        <script src="../../../ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../../bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../../assets/scripts/build/production.min.js"></script>
+        
+        <script src="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.js"></script>
+        <script>
+          docsearch({
+            apiKey: '8ed5262aecf5240c6d66dbba260f3e51',
+            appId: 'KS0N5YSBFY',
+            indexName: 'slim-docs',
+            inputSelector: '#docsearch',
+            debug: true,
+            transformData: function (suggestions) {
+              for (var i = 0; i < suggestions.length; i++) {
+                var suggestion = suggestions[i];
+
+                var docVersion = null;
+                var urlFragments = suggestion.url.split("/");
+                if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
+                  docVersion = urlFragments[2];
+                }
+
+                if (suggestion.hierarchy.lvl0 === null) {
+                  suggestions[i].hierarchy.lvl0 = docVersion ? "Slim " + docVersion + " - " + suggestion.title : suggestion.title
+                }
+              }
+              return suggestions;
+            },
+          });
+        </script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+

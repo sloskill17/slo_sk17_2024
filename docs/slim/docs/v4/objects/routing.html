@@ -1,0 +1,1493 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Routing - Slim Framework</title>
+        <meta name="description" content="">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Routing">
+        <meta property="og:site_name" content="Slim Framework">
+        <meta property="og:url" content="https://www.slimframework.com/docs/v4/objects/routing.html">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../../assets/css/all.css">
+        <link rel="stylesheet" href="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.css">
+        <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+        <link rel="stylesheet" href="../../../font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="../../../css?family=Lato:400,700" rel="stylesheet">
+        <script src="../../../yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="/">Slim</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li class="active"><a href="/docs/v4">User Guide</a></li>
+                        <li><a href="https://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="/contribute">Contribute</a></li>
+                    </ul>
+                    
+                        
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="navbar-documentation-version-badge">
+                                    <span>v4 Documentation</span>
+                                </div>
+                        
+                        
+                    
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav" aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    <h3 class="toc-title" style="margin-top:0">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        
+        
+            
+            
+            <option value="/docs/v2">v2</option>
+        
+            
+            
+            <option value="/docs/v3">v3</option>
+        
+            
+            
+            <option value="/docs/v4" selected="">v4</option>
+        
+    </select>
+</div>
+
+                    <h3 class="toc-title">Search</h3>
+<div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sbx-icon-clear-3" viewbox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+        <symbol id="sbx-icon-search-13" viewbox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+    </svg>
+</div>
+<form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0;margin-bottom:30px">
+    <div role="search" class="searchbox__wrapper">
+        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+        <button type="submit" title="Submit your search query." class="searchbox__submit">
+            <svg role="img" aria-label="Search">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+            </svg>
+        </button>
+        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+            <svg role="img" aria-label="Reset">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+                    
+                        
+                        
+                        <h3 class="toc-title">Get Started</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../index.htm">Home</a></li>
+                            
+                                
+                                <li><a href="../start/installation.html">Installation</a></li>
+                            
+                                
+                                <li><a href="../start/web-servers.html">Web Servers</a></li>
+                            
+                                
+                                <li><a href="../deployment/deployment.html">Deployment</a></li>
+                            
+                                
+                                <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Concepts</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../concepts/life-cycle.html">Application Life Cycle</a></li>
+                            
+                                
+                                <li><a href="../concepts/value-objects.html">PSR-7</a></li>
+                            
+                                
+                                <li><a href="../concepts/middleware.html">Middleware</a></li>
+                            
+                                
+                                <li><a href="../concepts/di.html">Dependency Container</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Application</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="application.html">Overview</a></li>
+                            
+                                
+                                <li><a href="application.html#advanced-notices-and-warnings-handling">Notices & Warnings Handling</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Request</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="request.html">Overview</a></li>
+                            
+                                
+                                <li><a href="request.html#the-request-method">Method</a></li>
+                            
+                                
+                                <li><a href="request.html#the-request-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="request.html#the-request-body">Body</a></li>
+                            
+                                
+                                <li><a href="request.html#uploaded-files">Uploaded Files</a></li>
+                            
+                                
+                                <li><a href="request.html#request-helpers">Helpers</a></li>
+                            
+                                
+                                <li><a href="request.html#route-object">Route object</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Response</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="response.html">Overview</a></li>
+                            
+                                
+                                <li><a href="response.html#the-response-status">Status</a></li>
+                            
+                                
+                                <li><a href="response.html#the-response-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="response.html#the-response-body">Body</a></li>
+                            
+                                
+                                <li><a href="response.html#returning-json">JSON</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title active">Routing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="routing.html">Overview</a></li>
+                            
+                                
+                                <li><a href="routing.html#how-to-create-routes">Create Routes</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-callbacks">Callbacks</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-strategies">Strategies</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-placeholders">Placeholders</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-names">Names</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-groups">Groups</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-middleware">Middleware</a></li>
+                            
+                                
+                                <li><a href="routing.html#route-expressions-caching">Caching</a></li>
+                            
+                                
+                                <li><a href="routing.html#container-resolution">Container Resolution</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Packaged Middleware</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../middleware/routing.html">Routing</a></li>
+                            
+                                
+                                <li><a href="../middleware/error-handling.html">Error Handling</a></li>
+                            
+                                
+                                <li><a href="../middleware/method-overriding.html">Method Overriding</a></li>
+                            
+                                
+                                <li><a href="../middleware/output-buffering.html">Output Buffering</a></li>
+                            
+                                
+                                <li><a href="../middleware/body-parsing.html">Body Parsing</a></li>
+                            
+                                
+                                <li><a href="../middleware/content-length.html">Content Length</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Cook book</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                            
+                                
+                                <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                            
+                                
+                                <li><a href="../cookbook/database-doctrine.html">Using Doctrine with Slim</a></li>
+                            
+                                
+                                <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
+                            
+                                
+                                <li><a href="../cookbook/uploading-files.html">Uploading Files using POST forms</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Add Ons</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../features/templates.html">Templates</a></li>
+                            
+                                
+                                <li><a href="../features/twig-view.html">Twig Templates</a></li>
+                            
+                                
+                                <li><a href="../features/php-view.html">PHP Templates</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Contributing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                            
+                                
+                                <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                            
+                        </ul>
+                    
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Routing</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/objects/routing.md" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>The Slim Framework’s router is built on top of the <a href="https://github.com/nikic/FastRoute">Fast Route</a> component, and it is remarkably fast and stable.
+While we are using this component to do all our routing, the app’s core has been entirely decoupled from it and interfaces have been put in place to
+pave the way for using other routing libraries.</p>
+
+<h2 id="how-to-create-routes">How to create routes</h2>
+
+<p>You can define application routes using proxy methods on the <code class="language-plaintext highlighter-rouge">Slim\App</code> instance. The Slim Framework provides methods for the most popular HTTP methods.</p>
+
+<h3 id="get-route">GET Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">GET</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">get()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/books/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Show book identified by $args['id']</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="post-route">POST Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">POST</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">post()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'/books'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Create new book</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="put-route">PUT Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">PUT</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">put()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">put</span><span class="p">(</span><span class="s1">'/books/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Update book identified by $args['id']</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="delete-route">DELETE Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">DELETE</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">delete()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nb">delete</span><span class="p">(</span><span class="s1">'/books/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Delete book identified by $args['id']</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="options-route">OPTIONS Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">OPTIONS</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">options()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">options</span><span class="p">(</span><span class="s1">'/books/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Return response headers</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="patch-route">PATCH Route</h3>
+
+<p>You can add a route that handles only <code class="language-plaintext highlighter-rouge">PATCH</code> HTTP requests with the Slim
+application’s <code class="language-plaintext highlighter-rouge">patch()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">patch</span><span class="p">(</span><span class="s1">'/books/{id}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Apply changes to book identified by $args['id']</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="any-route">Any Route</h3>
+
+<p>You can add a route that handles all HTTP request methods with the Slim application’s <code class="language-plaintext highlighter-rouge">any()</code> method. It accepts two arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">any</span><span class="p">(</span><span class="s1">'/books/[{id}]'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Apply changes to books or book identified by $args['id'] if specified.</span>
+    <span class="c1">// To check which method is used: $request-&gt;getMethod();</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Note that the second parameter is a callback. You could specify a Class which implements the <code class="language-plaintext highlighter-rouge">__invoke()</code> method instead of a Closure. You can then do the mapping somewhere else:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">any</span><span class="p">(</span><span class="s1">'/user'</span><span class="p">,</span> <span class="s1">'MyRestfulController'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="custom-route">Custom Route</h3>
+
+<p>You can add a route that handles multiple HTTP request methods with the Slim application’s <code class="language-plaintext highlighter-rouge">map()</code> method. It accepts three arguments:</p>
+
+<ol>
+  <li>Array of HTTP methods</li>
+  <li>The route pattern (with optional named placeholders)</li>
+  <li>The route callback</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'POST'</span><span class="p">],</span> <span class="s1">'/books'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Create new book or list all books</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="route-callbacks">Route callbacks</h2>
+
+<p>Each routing method described above accepts a callback routine as its final argument. This argument can be any PHP callable, and by default it accepts three arguments.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Request</code> The first argument is a <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ServerRequestInterface</code> object that represents the current HTTP request.</li>
+  <li><code class="language-plaintext highlighter-rouge">Response</code> The second argument is a <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseInterface</code> object that represents the current HTTP response.</li>
+  <li><code class="language-plaintext highlighter-rouge">Arguments</code> The third argument is an associative array that contains values for the current route’s named placeholders.</li>
+</ul>
+
+<h3 id="writing-content-to-the-response">Writing content to the response</h3>
+
+<p>There are two ways to write content to the HTTP response:</p>
+
+<ol>
+  <li>
+    <p>Using the <code class="language-plaintext highlighter-rouge">$response-&gt;getBody()-&gt;write('my content');</code> method of the Response object.</p>
+  </li>
+  <li>
+    <p>Simply <code class="language-plaintext highlighter-rouge">echo()</code> content from the route callback. 
+This content will be appended or prepended to the current HTTP response object 
+if you add the  <a href="../middleware/output-buffering.html">Output Buffering Middleware</a>.</p>
+  </li>
+</ol>
+
+<p>Please note that since Slim 4, you must return a <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseInterface</code> object.</p>
+
+<h3 id="closure-binding">Closure binding</h3>
+
+<p>If you use a <a href="../concepts/di.html">dependency container</a> and a <code class="language-plaintext highlighter-rouge">Closure</code> instance as the route callback, the closure’s state is bound to the <code class="language-plaintext highlighter-rouge">Container</code> instance. This means you will have access to the DI container instance <em>inside</em> of the Closure via the <code class="language-plaintext highlighter-rouge">$this</code> keyword:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Use app HTTP cookie service</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'cookies'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">set</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="p">[</span>
+        <span class="s1">'value'</span> <span class="o">=&gt;</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">],</span>
+        <span class="s1">'expires'</span> <span class="o">=&gt;</span> <span class="s1">'7 days'</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<div class="alert alert-info">
+    <div><strong>Heads Up!</strong></div>
+    <p>Slim does not support <code>static</code> closures.</p>
+</div>
+
+<h2 id="redirect-helper">Redirect helper</h2>
+
+<p>You can add a route that redirects <code class="language-plaintext highlighter-rouge">GET</code> HTTP requests to a different URL with
+the Slim application’s <code class="language-plaintext highlighter-rouge">redirect()</code> method. It accepts three arguments:</p>
+
+<ol>
+  <li>The route pattern (with optional named placeholders) to redirect <code class="language-plaintext highlighter-rouge">from</code></li>
+  <li>The location to redirect <code class="language-plaintext highlighter-rouge">to</code>, which may be a <code class="language-plaintext highlighter-rouge">string</code> or a
+<a href="https://www.php-fig.org/psr/psr-7/#35-psrhttpmessageuriinterface">Psr\Http\Message\UriInterface</a></li>
+  <li>The HTTP status code to use (optional; <code class="language-plaintext highlighter-rouge">302</code> if unset)</li>
+</ol>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">redirect</span><span class="p">(</span><span class="s1">'/books'</span><span class="p">,</span> <span class="s1">'/library'</span><span class="p">,</span> <span class="mi">301</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">redirect()</code> routes respond with the status code requested and a <code class="language-plaintext highlighter-rouge">Location</code>
+header set to the second argument.</p>
+
+<h2 id="route-strategies">Route strategies</h2>
+
+<p>The route callback signature is determined by a route strategy. By default, Slim expects route callbacks to accept the request, response, and an array of route placeholder arguments. This is called the RequestResponse strategy. However, you can change the expected route callback signature by simply using a different strategy. As an example, Slim provides an alternative strategy called <code class="language-plaintext highlighter-rouge">RequestResponseArgs</code> that accepts request and response, plus each route placeholder as a separate argument.</p>
+
+<p>Here is an example of using this alternative strategy:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Handlers\Strategies\RequestResponseArgs</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="cd">/**
+ * Changing the default invocation strategy on the RouteCollector component
+ * will change it for every route being defined after this change being applied
+ */</span>
+<span class="nv">$routeCollector</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getRouteCollector</span><span class="p">();</span>
+<span class="nv">$routeCollector</span><span class="o">-&gt;</span><span class="nf">setDefaultInvocationStrategy</span><span class="p">(</span><span class="k">new</span> <span class="nc">RequestResponseArgs</span><span class="p">());</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Alternatively you can set a different invocation strategy on a per route basis:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Handlers\Strategies\RequestResponseArgs</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+<span class="nv">$routeCollector</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getRouteCollector</span><span class="p">();</span>
+
+<span class="nv">$route</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">setInvocationStrategy</span><span class="p">(</span><span class="k">new</span> <span class="nc">RequestResponseArgs</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>You can provide your own route strategy by implementing the <code class="language-plaintext highlighter-rouge">Slim\Interfaces\InvocationStrategyInterface</code>.</p>
+
+<h2 id="route-placeholders">Route placeholders</h2>
+
+<p>Each routing method described above accepts a URL pattern that is matched against the current HTTP request URI. Route patterns may use named placeholders to dynamically match HTTP request URI segments.</p>
+
+<h3 id="format">Format</h3>
+
+<p>A route pattern placeholder starts with a <code class="language-plaintext highlighter-rouge">{</code>, followed by the placeholder name, ending with a <code class="language-plaintext highlighter-rouge">}</code>. This is an example placeholder named <code class="language-plaintext highlighter-rouge">name</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$name</span> <span class="o">=</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">];</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s2">"Hello, </span><span class="nv">$name</span><span class="s2">"</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="optional-segments">Optional segments</h3>
+
+<p>To make a section optional, simply wrap in square brackets:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/users[/{id}]'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// responds to both `/users` and `/users/123`</span>
+    <span class="c1">// but not to `/users/`</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>Multiple optional parameters are supported by nesting:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/news[/{year}[/{month}]]'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// responds to `/news`, `/news/2016` and `/news/2016/03`</span>
+    <span class="c1">// ...</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>For “Unlimited” optional parameters, you can do this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/news[/{params:.*}]'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// $params is an array of all the optional segments</span>
+    <span class="nv">$params</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'params'</span><span class="p">]);</span>
+    <span class="c1">// ...</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>In this example, a URI of <code class="language-plaintext highlighter-rouge">/news/2016/03/20</code> would result in the <code class="language-plaintext highlighter-rouge">$params</code> array
+containing three elements: <code class="language-plaintext highlighter-rouge">['2016', '03', '20']</code>.</p>
+
+<h3 id="regular-expression-matching">Regular expression matching</h3>
+
+<p>By default the placeholders are written inside <code class="language-plaintext highlighter-rouge">{}</code> and can accept any
+values. However, placeholders can also require the HTTP request URI to match a particular regular expression. If the current HTTP request URI does not match a placeholder regular expression, the route is not invoked. This is an example placeholder named <code class="language-plaintext highlighter-rouge">id</code> that requires one or more digits.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/users/{id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Find user identified by $args['id']</span>
+    <span class="c1">// ...</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="route-names">Route names</h2>
+
+<p>Application routes can be assigned a name. This is useful if you want to programmatically generate a URL to a specific route with the RouteParser’s <code class="language-plaintext highlighter-rouge">urlFor()</code> method. Each routing method described above returns a <code class="language-plaintext highlighter-rouge">Slim\Route</code> object, and this object exposes a <code class="language-plaintext highlighter-rouge">setName()</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s2">"Hello, "</span> <span class="mf">.</span> <span class="nv">$args</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You can generate a URL for this named route with the application RouteParser’s <code class="language-plaintext highlighter-rouge">urlFor()</code>  method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$routeParser</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getRouteCollector</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">getRouteParser</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$routeParser</span><span class="o">-&gt;</span><span class="nf">urlFor</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Josh'</span><span class="p">],</span> <span class="p">[</span><span class="s1">'example'</span> <span class="o">=&gt;</span> <span class="s1">'name'</span><span class="p">]);</span>
+
+<span class="c1">// Outputs "/hello/Josh?example=name"</span>
+</code></pre></div></div>
+
+<p>The RouteParser’s <code class="language-plaintext highlighter-rouge">urlFor()</code> method accepts three arguments:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">$routeName</code> The route name. A route’s name can be set via <code class="language-plaintext highlighter-rouge">$route-&gt;setName('name')</code>. Route mapping methods return an instance of <code class="language-plaintext highlighter-rouge">Route</code> so you can set the name directly after mapping the route. e.g.: <code class="language-plaintext highlighter-rouge">$app-&gt;get('/', function () {...})-&gt;setName('name')</code></li>
+  <li><code class="language-plaintext highlighter-rouge">$data</code> Associative array of route pattern placeholders and replacement values.</li>
+  <li><code class="language-plaintext highlighter-rouge">$queryParams</code> Associative array of query parameters to be appended to the generated url.</li>
+</ul>
+
+<h2 id="route-groups">Route groups</h2>
+
+<p>To help organize routes into logical groups, the <code class="language-plaintext highlighter-rouge">Slim\App</code> also provides a <code class="language-plaintext highlighter-rouge">group()</code> method. Each group’s route pattern is prepended to the routes or groups contained within it, and any placeholder arguments in the group pattern are ultimately made available to the nested routes:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/users/{id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">map</span><span class="p">([</span><span class="s1">'GET'</span><span class="p">,</span> <span class="s1">'DELETE'</span><span class="p">,</span> <span class="s1">'PATCH'</span><span class="p">,</span> <span class="s1">'PUT'</span><span class="p">],</span> <span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Find, delete, patch or replace user identified by $args['id']</span>
+        <span class="c1">// ...</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'user'</span><span class="p">);</span>
+    
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/reset-password'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Route for /users/{id:[0-9]+}/reset-password</span>
+        <span class="c1">// Reset the password for user identified by $args['id']</span>
+        <span class="c1">// ...</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">})</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'user-password-reset'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The group pattern can be empty, enabling the logical grouping of routes that do not share a common pattern.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/billing'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Route for /billing</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">});</span>
+    
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/invoice/{id:[0-9]+}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Route for /invoice/{id:[0-9]+}</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">GroupMiddleware</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>Note inside the group closure, Slim binds the closure to the container instance.</p>
+
+<ul>
+  <li>inside route closure, <code class="language-plaintext highlighter-rouge">$this</code> is bound to the instance of <code class="language-plaintext highlighter-rouge">Psr\Container\ContainerInterface</code></li>
+</ul>
+
+<h2 id="route-middleware">Route middleware</h2>
+<p>You can also attach middleware to any route or route group.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/foo'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/bar'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">RouteMiddleware</span><span class="p">());</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">GroupMiddleware</span><span class="p">());</span>
+</code></pre></div></div>
+
+<h2 id="route-expressions-caching">Route expressions caching</h2>
+
+<p>It’s possible to enable router cache via <code class="language-plaintext highlighter-rouge">RouteCollector::setCacheFile()</code>. See examples below:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="cd">/**
+ * To generate the route cache data, you need to set the file to one that does not exist in a writable directory.
+ * After the file is generated on first run, only read permissions for the file are required.
+ *
+ * You may need to generate this file in a development environment and committing it to your project before deploying
+ * if you don't have write permissions for the directory where the cache file resides on the server it is being deployed to
+ */</span>
+<span class="nv">$routeCollector</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getRouteCollector</span><span class="p">();</span>
+<span class="nv">$routeCollector</span><span class="o">-&gt;</span><span class="nf">setCacheFile</span><span class="p">(</span><span class="s1">'/path/to/cache.file'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="container-resolution">Container Resolution</h2>
+
+<p>You are not limited to defining a function for your routes. In Slim there are a few different ways to define your route action functions.</p>
+
+<p>In addition to a function, you may use:</p>
+
+<ul>
+  <li>container_key:method</li>
+  <li>Class:method</li>
+  <li>Class implementing <code class="language-plaintext highlighter-rouge">__invoke()</code> method</li>
+  <li>container_key</li>
+</ul>
+
+<p>This functionality is enabled by Slim’s Callable Resolver Class. It translates a string entry into a function call.
+Example:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="s1">'\HomeController:home'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Alternatively, you can take advantage of PHP’s <code class="language-plaintext highlighter-rouge">::class</code> operator which works well with IDE lookup systems and produces the same result:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="err">\</span><span class="nc">HomeController</span><span class="o">::</span><span class="n">class</span> <span class="mf">.</span> <span class="s1">':home'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You can also pass an array, the first element of which will contain the name of the class, and the second will contain the name of the method being called:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">[</span><span class="err">\</span><span class="nc">HomeController</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="s1">'home'</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>In this code above we are defining a <code class="language-plaintext highlighter-rouge">/</code> route and telling Slim to execute the <code class="language-plaintext highlighter-rouge">home()</code> method on the <code class="language-plaintext highlighter-rouge">HomeController</code> class.</p>
+
+<p>Slim first looks for an entry of <code class="language-plaintext highlighter-rouge">HomeController</code> in the container, if it’s found it will use that instance, otherwise it will call its constructor with the container as the first argument. Once an instance of the class is created it will then call the specified method using whatever Strategy you have defined.</p>
+
+<h3 id="registering-a-controller-with-the-container">Registering a controller with the container</h3>
+
+<p>Create a controller with the <code class="language-plaintext highlighter-rouge">home</code> action method. The constructor should accept
+the dependencies that are required. For example:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Views\Twig</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HomeController</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$view</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">Twig</span> <span class="nv">$view</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">view</span> <span class="o">=</span> <span class="nv">$view</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="n">home</span><span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">):</span> <span class="kt">ResponseInterface</span>
+    <span class="p">{</span>
+      <span class="c1">// your code here</span>
+      <span class="c1">// use $this-&gt;view to render the HTML</span>
+      <span class="c1">// ...</span>
+      
+      <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Create a factory in the container that instantiates the controller with the dependencies:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
+
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">set</span><span class="p">(</span><span class="err">\</span><span class="nc">HomeController</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// retrieve the 'view' from the container</span>
+    <span class="nv">$view</span> <span class="o">=</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'view'</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="k">new</span> <span class="nc">HomeController</span><span class="p">(</span><span class="nv">$view</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>This allows you to leverage the container for dependency injection and so you can
+inject specific dependencies into the controller.</p>
+
+<h3 id="allow-slim-to-instantiate-the-controller">Allow Slim to instantiate the controller</h3>
+
+<p>Alternatively, if the class does not have an entry in the container, then Slim
+will pass the container’s instance to the constructor. You can construct controllers
+with many actions instead of an invokable class which only handles one action.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HomeController</span>
+<span class="p">{</span>
+   <span class="k">private</span> <span class="nv">$container</span><span class="p">;</span>
+
+   <span class="c1">// constructor receives container instance</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">container</span> <span class="o">=</span> <span class="nv">$container</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">public</span> <span class="k">function</span> <span class="n">home</span><span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">):</span> <span class="kt">ResponseInterface</span>
+   <span class="p">{</span>
+        <span class="c1">// your code to access items in the container... $this-&gt;container-&gt;get('');</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">public</span> <span class="k">function</span> <span class="n">contact</span><span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">):</span> <span class="kt">ResponseInterface</span>
+   <span class="p">{</span>
+        <span class="c1">// your code to access items in the container... $this-&gt;container-&gt;get('');</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can use your controller methods like so.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="err">\</span><span class="nc">HomeController</span><span class="o">::</span><span class="n">class</span> <span class="mf">.</span> <span class="s1">':home'</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/contact'</span><span class="p">,</span> <span class="err">\</span><span class="nc">HomeController</span><span class="o">::</span><span class="n">class</span> <span class="mf">.</span> <span class="s1">':contact'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="using-an-invokable-class">Using an invokable class</h3>
+
+<p>You do not have to specify a method in your route callable and can just set it to be an invokable class such as:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">HomeAction</span>
+<span class="p">{</span>
+   <span class="k">private</span> <span class="nv">$container</span><span class="p">;</span>
+
+   <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">container</span> <span class="o">=</span> <span class="nv">$container</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">ResponseInterface</span> <span class="nv">$response</span><span class="p">,</span> <span class="kt">array</span> <span class="nv">$args</span><span class="p">):</span> <span class="kt">ResponseInterface</span>
+   <span class="p">{</span>
+        <span class="c1">// your code to access items in the container... $this-&gt;container-&gt;get('');</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can use this class like so.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="err">\</span><span class="nc">HomeAction</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Again, as with controllers, if you register the class name with the container, then you
+can create a factory and inject just the specific dependencies that you require into your
+action class.</p>
+
+<h2 id="route-object">Route Object</h2>
+
+<p>Sometimes in middleware you require the parameter of your route.</p>
+
+<p>In this example we are checking first that the user is logged in and second that
+the user has permissions to view the particular video they are attempting to view.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/course/{id}'</span><span class="p">,</span> <span class="nc">Video</span><span class="o">::</span><span class="n">class</span> <span class="mf">.</span> <span class="s1">':watch'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nc">PermissionMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">PermissionMiddleware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$route</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getRoute</span><span class="p">();</span>
+        
+        <span class="nv">$courseId</span> <span class="o">=</span> <span class="nv">$route</span><span class="o">-&gt;</span><span class="nf">getArgument</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+        
+        <span class="c1">// do permission logic...</span>
+        
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="obtain-base-path-from-within-route">Obtain Base Path From Within Route</h2>
+
+<p>To obtain the base path from within a route simply do the following:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$basePath</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getBasePath</span><span class="p">();</span>
+    <span class="c1">// ...</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="response.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>The Response: </small> Overview</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../middleware/routing.html" rel="next"><small>Packaged Middleware: </small> Routing <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br>
+        <a href="http://joshlockhart.com">Josh Lockhart</a>,
+        <a href="https://www.donielsmith.com" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+        <input type="image" src="../../../en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="../../../en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</footer>
+
+    </div>
+</div>
+        <script src="../../../ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../../bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../../assets/scripts/build/production.min.js"></script>
+        
+        <script src="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.js"></script>
+        <script>
+          docsearch({
+            apiKey: '8ed5262aecf5240c6d66dbba260f3e51',
+            appId: 'KS0N5YSBFY',
+            indexName: 'slim-docs',
+            inputSelector: '#docsearch',
+            debug: true,
+            transformData: function (suggestions) {
+              for (var i = 0; i < suggestions.length; i++) {
+                var suggestion = suggestions[i];
+
+                var docVersion = null;
+                var urlFragments = suggestion.url.split("/");
+                if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
+                  docVersion = urlFragments[2];
+                }
+
+                if (suggestion.hierarchy.lvl0 === null) {
+                  suggestions[i].hierarchy.lvl0 = docVersion ? "Slim " + docVersion + " - " + suggestion.title : suggestion.title
+                }
+              }
+              return suggestions;
+            },
+          });
+        </script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+

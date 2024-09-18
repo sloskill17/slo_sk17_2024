@@ -1,0 +1,1194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Upgrade Guide - Slim Framework</title>
+        <meta name="description" content="">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Upgrade Guide">
+        <meta property="og:site_name" content="Slim Framework">
+        <meta property="og:url" content="https://www.slimframework.com/docs/v4/start/upgrade.html">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../../assets/css/all.css">
+        <link rel="stylesheet" href="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.css">
+        <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+        <link rel="stylesheet" href="../../../font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="../../../css?family=Lato:400,700" rel="stylesheet">
+        <script src="../../../yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="/">Slim</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li class="active"><a href="/docs/v4">User Guide</a></li>
+                        <li><a href="https://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="/contribute">Contribute</a></li>
+                    </ul>
+                    
+                        
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="navbar-documentation-version-badge">
+                                    <span>v4 Documentation</span>
+                                </div>
+                        
+                        
+                    
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav" aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    <h3 class="toc-title" style="margin-top:0">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        
+        
+            
+            
+            <option value="/docs/v2">v2</option>
+        
+            
+            
+            <option value="/docs/v3">v3</option>
+        
+            
+            
+            <option value="/docs/v4" selected="">v4</option>
+        
+    </select>
+</div>
+
+                    <h3 class="toc-title">Search</h3>
+<div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sbx-icon-clear-3" viewbox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+        <symbol id="sbx-icon-search-13" viewbox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+    </svg>
+</div>
+<form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0;margin-bottom:30px">
+    <div role="search" class="searchbox__wrapper">
+        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+        <button type="submit" title="Submit your search query." class="searchbox__submit">
+            <svg role="img" aria-label="Search">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+            </svg>
+        </button>
+        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+            <svg role="img" aria-label="Reset">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+                    
+                        
+                        
+                        <h3 class="toc-title active">Get Started</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../index.htm">Home</a></li>
+                            
+                                
+                                <li><a href="installation.html">Installation</a></li>
+                            
+                                
+                                <li><a href="web-servers.html">Web Servers</a></li>
+                            
+                                
+                                <li><a href="../deployment/deployment.html">Deployment</a></li>
+                            
+                                
+                                <li><a href="upgrade.html">Upgrade Guide</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Concepts</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../concepts/life-cycle.html">Application Life Cycle</a></li>
+                            
+                                
+                                <li><a href="../concepts/value-objects.html">PSR-7</a></li>
+                            
+                                
+                                <li><a href="../concepts/middleware.html">Middleware</a></li>
+                            
+                                
+                                <li><a href="../concepts/di.html">Dependency Container</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Application</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/application.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/application.html#advanced-notices-and-warnings-handling">Notices & Warnings Handling</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Request</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/request.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#uploaded-files">Uploaded Files</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#route-object">Route object</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Response</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/response.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Routing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/routing.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#how-to-create-routes">Create Routes</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-callbacks">Callbacks</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-strategies">Strategies</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-placeholders">Placeholders</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-names">Names</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-groups">Groups</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-middleware">Middleware</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-expressions-caching">Caching</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#container-resolution">Container Resolution</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Packaged Middleware</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../middleware/routing.html">Routing</a></li>
+                            
+                                
+                                <li><a href="../middleware/error-handling.html">Error Handling</a></li>
+                            
+                                
+                                <li><a href="../middleware/method-overriding.html">Method Overriding</a></li>
+                            
+                                
+                                <li><a href="../middleware/output-buffering.html">Output Buffering</a></li>
+                            
+                                
+                                <li><a href="../middleware/body-parsing.html">Body Parsing</a></li>
+                            
+                                
+                                <li><a href="../middleware/content-length.html">Content Length</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Cook book</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                            
+                                
+                                <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                            
+                                
+                                <li><a href="../cookbook/database-doctrine.html">Using Doctrine with Slim</a></li>
+                            
+                                
+                                <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
+                            
+                                
+                                <li><a href="../cookbook/uploading-files.html">Uploading Files using POST forms</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Add Ons</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../features/templates.html">Templates</a></li>
+                            
+                                
+                                <li><a href="../features/twig-view.html">Twig Templates</a></li>
+                            
+                                
+                                <li><a href="../features/php-view.html">PHP Templates</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Contributing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                            
+                                
+                                <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                            
+                        </ul>
+                    
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Upgrade Guide</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/start/upgrade.md" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>If you are upgrading from version 3 to version 4, these are the significant changes that you need to be aware of.</p>
+
+<h2 id="php-version-requirement">PHP Version Requirement</h2>
+
+<p>Slim 4 requires <strong>PHP 7.4 or newer</strong>.</p>
+
+<h2 id="breaking-changes-to-slimapp-constructor">Breaking changes to Slim\App constructor</h2>
+
+<p>Slim’s App settings used to be a part of the container and they have now been decoupled from it.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
+ * Slim 3 App::__construct($container = [])
+ * As seen here the settings used to be nested
+ */</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">App</span><span class="p">([</span>
+    <span class="s1">'settings'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="mf">...</span><span class="p">],</span>
+<span class="p">]);</span>
+
+<span class="cd">/**
+ * Slim 4 App::__constructor() method takes 1 mandatory parameter and 4 optional parameters
+ * 
+ * @param ResponseFactoryInterface Any implementation of a ResponseFactory
+ * @param ContainerInterface|null Any implementation of a Container
+ * @param CallableResolverInterface|null Any implementation of a CallableResolver
+ * @param RouteCollectorInterface|null Any implementation of a RouteCollector
+ * @param RouteResolverInterface|null Any implementation of a RouteResolver
+ */</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">App</span><span class="p">(</span><span class="mf">...</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="removed-app-settings">Removed App Settings</h2>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">addContentLengthHeader</code> See <a href="../middleware/content-length.html">Content Length Middleware</a> for new implementation of this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">determineRouteBeforeAppMiddleware</code> Position <a href="../middleware/routing.html">Routing Middleware</a> at the right position in your middleware stack to replicate existing behavior.</li>
+  <li><code class="language-plaintext highlighter-rouge">outputBuffering</code> See <a href="../middleware/output-buffering.html">Output Buffering Middleware</a> for new implementation of this setting.</li>
+  <li><code class="language-plaintext highlighter-rouge">displayErrorDetails</code> See <a href="../middleware/error-handling.html">Error Handling Middleware</a> for new implementation of this setting.</li>
+</ul>
+
+<h2 id="changes-to-container">Changes to Container</h2>
+
+<p>Slim no longer has a Container so you need to supply your own. 
+If you were relying on request or response being in the container, then you need to either set them to a container yourself, or refactor. 
+Also, <code class="language-plaintext highlighter-rouge">App::__call()</code> method has been removed, so accessing a container property via <code class="language-plaintext highlighter-rouge">$app-&gt;key_name()</code> no longer works.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
+ * Slim 3.x shipped with the Pimple container implementation and enabled the following syntax
+ */</span>
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
+
+<span class="c1">//Assign dependencies as array</span>
+<span class="nv">$container</span><span class="p">[</span><span class="s1">'view'</span><span class="p">]</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="err">\</span><span class="nc">Psr\Container\ContainerInterface</span> <span class="nv">$container</span><span class="p">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\Twig</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="cd">/**
+ * Slim 4.x does not ship with a container library. 
+ * It supports all PSR-11 implementations such as PHP-DI.
+ * To install PHP-DI `composer require php-di/php-di`
+ */</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">DI\Container</span><span class="p">();</span>
+
+<span class="nc">AppFactory</span><span class="o">::</span><span class="nf">setContainer</span><span class="p">(</span><span class="nv">$container</span><span class="p">);</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$container</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getContainer</span><span class="p">();</span>
+<span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">set</span><span class="p">(</span><span class="s1">'view'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="err">\</span><span class="nc">Psr\Container\ContainerInterface</span> <span class="nv">$container</span><span class="p">){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="err">\</span><span class="nf">Slim\Views\Twig</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="changes-to-base-path-handling">Changes to base path handling</h2>
+
+<p>Up to v3, Slim extracted the base path from the folder where the application was instantiated. 
+This is no longer the case, and the base path must be explicitly declared <a href="web-servers.html#run-from-a-sub-directory">in case your application is not executed from the root of your domain</a>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">setBasePath</span><span class="p">(</span><span class="s1">'/my-app-subpath'</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="changes-to-routing-components">Changes to Routing components</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">Router</code> component from Slim 3 has been split into multiple different components in order to decouple FastRoute from the <code class="language-plaintext highlighter-rouge">App</code> core and offer more flexibility to the end user. 
+It has been split into <code class="language-plaintext highlighter-rouge">RouteCollector</code>, <code class="language-plaintext highlighter-rouge">RouteParser</code> and <code class="language-plaintext highlighter-rouge">RouteResolver</code>. 
+Those 3 components can all have their respective interfaces which you can implement on your own and inject into the <code class="language-plaintext highlighter-rouge">App</code> constructor. 
+The following pull requests offer a lot of insight on the public interfaces of these new components:</p>
+
+<ul>
+  <li><a href="https://github.com/slimphp/Slim/pull/2604">Pull Request #2604</a></li>
+  <li><a href="https://github.com/slimphp/Slim/pull/2622">Pull Request #2622</a></li>
+  <li><a href="https://github.com/slimphp/Slim/pull/2639">Pull Request #2639</a></li>
+  <li><a href="https://github.com/slimphp/Slim/pull/2640">Pull Request #2640</a></li>
+  <li><a href="https://github.com/slimphp/Slim/pull/2641">Pull Request #2641</a></li>
+  <li><a href="https://github.com/slimphp/Slim/pull/2642">Pull Request #2642</a></li>
+</ul>
+
+<p>This also means that <a href="../objects/routing.html#route-groups">Route Groups</a> have changed their signatures:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/user'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="err">\</span><span class="nc">Slim\Routing\RouteCollectorProxy</span> <span class="nv">$app</span><span class="p">){</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <span class="c1">//...</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="new-middleware-approach">New Middleware Approach</h2>
+
+<p>In Slim 4 we wanted to give more flexibility to the developers by decoupling some of Slim’s App core functionality and implementing it as middleware. 
+This gives you the ability to swap in custom implementations of the core components.</p>
+
+<h2 id="middleware-execution">Middleware Execution</h2>
+
+<p>Middleware execution has not changed and is still <code class="language-plaintext highlighter-rouge">Last In First Out (LIFO)</code> like in Slim 3.</p>
+
+<h2 id="new-app-factory">New App Factory</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">AppFactory</code> component was introduced to reduce some of the friction caused by decoupling the PSR-7 implementation from the <code class="language-plaintext highlighter-rouge">App</code> core. 
+It detects which PSR-7 implementation and ServerRequest creator is installed in your project root and enables you to instantiate an app via <code class="language-plaintext highlighter-rouge">AppFactory::create()</code> and use <code class="language-plaintext highlighter-rouge">App::run()</code> without having to pass in a <code class="language-plaintext highlighter-rouge">ServerRequest</code> object. 
+The following PSR-7 implementations and ServerRequest creator combos are supported:</p>
+
+<ul>
+  <li><a href="https://github.com/slimphp/Slim-Psr7">Slim PSR-7</a></li>
+  <li><a href="https://github.com/Nyholm/psr7">Nyholm PSR-7</a> and <a href="https://github.com/Nyholm/psr7-server">Nyholm PSR-7 Server</a></li>
+  <li><a href="https://github.com/guzzle/psr7">Guzzle PSR-7</a> and <a href="https://github.com/http-interop/http-factory-guzzle">Guzzle HTTP Factory</a></li>
+  <li><a href="https://github.com/laminas/laminas-diactoros">Laminas Diactoros</a></li>
+</ul>
+
+<h2 id="new-routing-middleware">New Routing Middleware</h2>
+
+<p>The routing has been implemented as middleware. We are still using <a href="https://github.com/nikic/FastRoute">FastRoute</a> for our routing needs.
+If you were using <code class="language-plaintext highlighter-rouge">determineRouteBeforeAppMiddleware</code>, you need to add the <code class="language-plaintext highlighter-rouge">Middleware\RoutingMiddleware</code> middleware to your application just before you call <code class="language-plaintext highlighter-rouge">run()</code> to maintain the previous behaviour.
+See <a href="https://github.com/slimphp/Slim/pull/2288">Pull Request #2288</a> for more information.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="c1">// Add Routing Middleware</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-error-handling-middleware">New Error Handling Middleware</h2>
+
+<p>Error handling has also been implemented as middleware.
+See <a href="https://github.com/slimphp/Slim/pull/2398">Pull Request #2398</a> for more information.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="cd">/**
+ * The routing middleware should be added before the ErrorMiddleware
+ * Otherwise exceptions thrown from it will not be handled
+ */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addRoutingMiddleware</span><span class="p">();</span>
+
+<span class="cd">/**
+ * Add Error Handling Middleware
+ *
+ * @param bool $displayErrorDetails -&gt; Should be set to false in production
+ * @param bool $logErrors -&gt; Parameter is passed to the default ErrorHandler
+ * @param bool $logErrorDetails -&gt; Display error details in error log
+ * which can be replaced by a callable of your choice.
+ 
+ * Note: This middleware should be added last. It will not handle any exceptions/errors
+ * for middleware added after it.
+ */</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-not-found--and-not-allowed-handler">New Not Found- and Not Allowed Handler</h2>
+
+<p>The <a href="http://www.slimframework.com/docs/v3/handlers/not-found.html">404 Not Found Handler</a> and the <a href="http://www.slimframework.com/docs/v3/handlers/not-allowed.html">405 Not Allowed Handler</a> from v3 can be migrated as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Exception\HttpNotFoundException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Exception\HttpMethodNotAllowedException</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Psr7\Response</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$errorMiddleware</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addErrorMiddleware</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// Set the Not Found Handler</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="nf">setErrorHandler</span><span class="p">(</span>
+    <span class="nc">HttpNotFoundException</span><span class="o">::</span><span class="n">class</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="kt">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Response</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'404 NOT FOUND'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">404</span><span class="p">);</span>
+    <span class="p">});</span>
+
+<span class="c1">// Set the Not Allowed Handler</span>
+<span class="nv">$errorMiddleware</span><span class="o">-&gt;</span><span class="nf">setErrorHandler</span><span class="p">(</span>
+    <span class="nc">HttpMethodNotAllowedException</span><span class="o">::</span><span class="n">class</span><span class="p">,</span>
+    <span class="k">function</span> <span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Throwable</span> <span class="nv">$exception</span><span class="p">,</span> <span class="kt">bool</span> <span class="nv">$displayErrorDetails</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Response</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'405 NOT ALLOWED'</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">405</span><span class="p">);</span>
+    <span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="new-dispatcher--routing-results">New Dispatcher &amp; Routing Results</h2>
+
+<p>We created a wrapper around the FastRoute dispatcher which adds a result wrapper and access to a route’s full list of allowed methods instead of only having access to those when an exception arises.
+The Request attribute <code class="language-plaintext highlighter-rouge">routeInfo</code> is now deprecated and replaced with <code class="language-plaintext highlighter-rouge">routingResults</code>.
+See <a href="https://github.com/slimphp/Slim/pull/2405">Pull Request #2405</a> for more information.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteContext</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/hello/{name}'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$routeContext</span> <span class="o">=</span> <span class="nc">RouteContext</span><span class="o">::</span><span class="nf">fromRequest</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$routingResults</span> <span class="o">=</span> <span class="nv">$routeContext</span><span class="o">-&gt;</span><span class="nf">getRoutingResults</span><span class="p">();</span>
+    
+    <span class="c1">// Get all of the route's parsed arguments e.g. ['name' =&gt; 'John']</span>
+    <span class="nv">$routeArguments</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="nf">getRouteArguments</span><span class="p">();</span>
+    
+    <span class="c1">// A route's allowed methods are available at all times now and not only when an error arises like in Slim 3</span>
+    <span class="nv">$allowedMethods</span> <span class="o">=</span> <span class="nv">$routingResults</span><span class="o">-&gt;</span><span class="nf">getAllowedMethods</span><span class="p">();</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-method-overriding-middleware">New Method Overriding Middleware</h2>
+
+<p>If you were overriding the HTTP method using either the custom header or the body param, you need to add the <code class="language-plaintext highlighter-rouge">Middleware\MethodOverrideMiddleware</code> middleware to be able to override the method like before.
+See <a href="https://github.com/slimphp/Slim/pull/2329">Pull Request #2329</a> for more information.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Middleware\MethodOverridingMiddleware</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$methodOverridingMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MethodOverrideMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$methodOverridingMiddleware</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-content-length-middleware">New Content Length Middleware</h2>
+
+<p>The Content Length Middleware will automatically append a <code class="language-plaintext highlighter-rouge">Content-Length</code> header to the response. 
+This is to replace the <code class="language-plaintext highlighter-rouge">addContentLengthHeader</code> setting that was removed from Slim 3. 
+This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Middleware\ContentLengthMiddleware</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$contentLengthMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ContentLengthMiddleware</span><span class="p">();</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$contentLengthMiddleware</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h2 id="new-output-buffering-middleware">New Output Buffering Middleware</h2>
+
+<p>The Output Buffering Middleware enables you to switch between two modes of output buffering: <code class="language-plaintext highlighter-rouge">APPEND</code> (default) and <code class="language-plaintext highlighter-rouge">PREPEND</code> mode. 
+The <code class="language-plaintext highlighter-rouge">APPEND</code> mode will use the existing response body to append the content while <code class="language-plaintext highlighter-rouge">PREPEND</code> mode will create a new response body and append it to the existing response. 
+This middleware should be placed on the center of the middleware stack so it gets executed last.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Middleware\OutputBufferingMiddleware</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="cd">/**
+ * The two modes available are
+ * OutputBufferingMiddleware::APPEND (default mode) - Appends to existing response body
+ * OutputBufferingMiddleware::PREPEND - Creates entirely new response body
+ */</span>
+<span class="nv">$mode</span> <span class="o">=</span> <span class="nc">OutputBufferingMiddleware</span><span class="o">::</span><span class="no">APPEND</span><span class="p">;</span>
+<span class="nv">$outputBufferingMiddleware</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OutputBufferingMiddleware</span><span class="p">(</span><span class="nv">$mode</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="../deployment/deployment.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Get Started: </small> Deployment</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="../concepts/life-cycle.html" rel="next"><small>Concepts: </small> Application Life Cycle <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br>
+        <a href="http://joshlockhart.com">Josh Lockhart</a>,
+        <a href="https://www.donielsmith.com" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+        <input type="image" src="../../../en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="../../../en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</footer>
+
+    </div>
+</div>
+        <script src="../../../ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../../bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../../assets/scripts/build/production.min.js"></script>
+        
+        <script src="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.js"></script>
+        <script>
+          docsearch({
+            apiKey: '8ed5262aecf5240c6d66dbba260f3e51',
+            appId: 'KS0N5YSBFY',
+            indexName: 'slim-docs',
+            inputSelector: '#docsearch',
+            debug: true,
+            transformData: function (suggestions) {
+              for (var i = 0; i < suggestions.length; i++) {
+                var suggestion = suggestions[i];
+
+                var docVersion = null;
+                var urlFragments = suggestion.url.split("/");
+                if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
+                  docVersion = urlFragments[2];
+                }
+
+                if (suggestion.hierarchy.lvl0 === null) {
+                  suggestions[i].hierarchy.lvl0 = docVersion ? "Slim " + docVersion + " - " + suggestion.title : suggestion.title
+                }
+              }
+              return suggestions;
+            },
+          });
+        </script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+

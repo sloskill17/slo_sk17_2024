@@ -1,0 +1,1283 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Middleware - Slim Framework</title>
+        <meta name="description" content="">
+        <meta name="robots" content="index, follow">
+        <meta property="og:title" content="Middleware">
+        <meta property="og:site_name" content="Slim Framework">
+        <meta property="og:url" content="https://www.slimframework.com/docs/v4/concepts/middleware.html">
+        <meta property="og:description" content="">
+        <meta property="og:type" content="website">
+        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <link rel="stylesheet" href="../../../assets/css/all.css">
+        <link rel="stylesheet" href="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.css">
+        <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+        <link rel="stylesheet" href="../../../font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="../../../css?family=Lato:400,700" rel="stylesheet">
+        <script src="../../../yjz4fyo.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>
+        <script>
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-19430723-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-logo" href="/">Slim</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li class="active"><a href="/docs/v4">User Guide</a></li>
+                        <li><a href="https://discourse.slimframework.com/">Support</a></li>
+                        <li><a href="/contribute">Contribute</a></li>
+                    </ul>
+                    
+                        
+                        
+                            
+                        
+                            
+                        
+                            
+                                <div class="navbar-documentation-version-badge">
+                                    <span>v4 Documentation</span>
+                                </div>
+                        
+                        
+                    
+                </div>
+            </div>
+        </nav>
+
+<div class="wrapper docs">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="toc-nav-toggle">
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#tocNav" aria-expanded="false" aria-controls="tocNav">
+                        Toggle Navigation
+                    </button>
+                </div>
+                <div class="collapse toc-nav-collapse" id="tocNav">
+                    <h3 class="toc-title" style="margin-top:0">Slim Version</h3>
+<div style="border:1px solid #CCC;border-radius:16px;box-sizing:border-box;margin:0 0 30px;padding:0 8px;width:200px;-webkit-appearance:none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" style="border:0;border-radius:16px;height:32px;margin:0;outline:none;padding:0;width:100%">
+        
+        
+            
+            
+            <option value="/docs/v2">v2</option>
+        
+            
+            
+            <option value="/docs/v3">v3</option>
+        
+            
+            
+            <option value="/docs/v4" selected="">v4</option>
+        
+    </select>
+</div>
+
+                    <h3 class="toc-title">Search</h3>
+<div class="svg-icons" style="height: 0; width: 0; position: absolute; visibility: hidden">
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <symbol id="sbx-icon-clear-3" viewbox="0 0 40 40"><path d="M16.228 20L1.886 5.657 0 3.772 3.772 0l1.885 1.886L20 16.228 34.343 1.886 36.228 0 40 3.772l-1.886 1.885L23.772 20l14.342 14.343L40 36.228 36.228 40l-1.885-1.886L20 23.772 5.657 38.114 3.772 40 0 36.228l1.886-1.885L16.228 20z" fill-rule="evenodd"></path></symbol>
+        <symbol id="sbx-icon-search-13" viewbox="0 0 40 40"><path d="M26.806 29.012a16.312 16.312 0 0 1-10.427 3.746C7.332 32.758 0 25.425 0 16.378 0 7.334 7.333 0 16.38 0c9.045 0 16.378 7.333 16.378 16.38 0 3.96-1.406 7.593-3.746 10.426L39.547 37.34c.607.608.61 1.59-.004 2.203a1.56 1.56 0 0 1-2.202.004L26.807 29.012zm-10.427.627c7.322 0 13.26-5.938 13.26-13.26 0-7.324-5.938-13.26-13.26-13.26-7.324 0-13.26 5.936-13.26 13.26 0 7.322 5.936 13.26 13.26 13.26z" fill-rule="evenodd"></path></symbol>
+    </svg>
+</div>
+<form novalidate="novalidate" onsubmit="return false;" class="searchbox" style="visibility:hidden;height:0;margin-bottom:30px">
+    <div role="search" class="searchbox__wrapper">
+        <input id="docsearch" type="search" name="search" placeholder="Search in the doc" autocomplete="off" required="required" class="searchbox__input">
+        <button type="submit" title="Submit your search query." class="searchbox__submit">
+            <svg role="img" aria-label="Search">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-search-13"></use>
+            </svg>
+        </button>
+        <button type="reset" title="Clear the search query." class="searchbox__reset hide">
+            <svg role="img" aria-label="Reset">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#sbx-icon-clear-3"></use>
+            </svg>
+        </button>
+    </div>
+</form>
+                    
+                        
+                        
+                        <h3 class="toc-title">Get Started</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../index.htm">Home</a></li>
+                            
+                                
+                                <li><a href="../start/installation.html">Installation</a></li>
+                            
+                                
+                                <li><a href="../start/web-servers.html">Web Servers</a></li>
+                            
+                                
+                                <li><a href="../deployment/deployment.html">Deployment</a></li>
+                            
+                                
+                                <li><a href="../start/upgrade.html">Upgrade Guide</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title active">Concepts</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="life-cycle.html">Application Life Cycle</a></li>
+                            
+                                
+                                <li><a href="value-objects.html">PSR-7</a></li>
+                            
+                                
+                                <li><a href="middleware.html">Middleware</a></li>
+                            
+                                
+                                <li><a href="di.html">Dependency Container</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Application</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/application.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/application.html#advanced-notices-and-warnings-handling">Notices & Warnings Handling</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Request</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/request.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-method">Method</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#the-request-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#uploaded-files">Uploaded Files</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#request-helpers">Helpers</a></li>
+                            
+                                
+                                <li><a href="../objects/request.html#route-object">Route object</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">The Response</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/response.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-status">Status</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-headers">Headers</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#the-response-body">Body</a></li>
+                            
+                                
+                                <li><a href="../objects/response.html#returning-json">JSON</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Routing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../objects/routing.html">Overview</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#how-to-create-routes">Create Routes</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-callbacks">Callbacks</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-strategies">Strategies</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-placeholders">Placeholders</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-names">Names</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-groups">Groups</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-middleware">Middleware</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#route-expressions-caching">Caching</a></li>
+                            
+                                
+                                <li><a href="../objects/routing.html#container-resolution">Container Resolution</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Packaged Middleware</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../middleware/routing.html">Routing</a></li>
+                            
+                                
+                                <li><a href="../middleware/error-handling.html">Error Handling</a></li>
+                            
+                                
+                                <li><a href="../middleware/method-overriding.html">Method Overriding</a></li>
+                            
+                                
+                                <li><a href="../middleware/output-buffering.html">Output Buffering</a></li>
+                            
+                                
+                                <li><a href="../middleware/body-parsing.html">Body Parsing</a></li>
+                            
+                                
+                                <li><a href="../middleware/content-length.html">Content Length</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Cook book</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../cookbook/route-patterns.html">Trailing / in routes</a></li>
+                            
+                                
+                                <li><a href="../cookbook/retrieving-current-route.html">Retrieving Current Route</a></li>
+                            
+                                
+                                <li><a href="../cookbook/database-doctrine.html">Using Doctrine with Slim</a></li>
+                            
+                                
+                                <li><a href="../cookbook/enable-cors.html">Enabling CORS</a></li>
+                            
+                                
+                                <li><a href="../cookbook/uploading-files.html">Uploading Files using POST forms</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Add Ons</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../features/templates.html">Templates</a></li>
+                            
+                                
+                                <li><a href="../features/twig-view.html">Twig Templates</a></li>
+                            
+                                
+                                <li><a href="../features/php-view.html">PHP Templates</a></li>
+                            
+                        </ul>
+                    
+                        
+                        
+                        <h3 class="toc-title">Contributing</h3>
+                        <ul class="toc-links">
+                            
+                                
+                                <li><a href="../contributors/strategy.html">Branching Strategy</a></li>
+                            
+                                
+                                <li><a href="../contributors/guidelines.html">Guidelines</a></li>
+                            
+                        </ul>
+                    
+
+                    <h3 class="toc-title">Professional Support</h3>
+                    <ul class="toc-links">
+                        <li><a href="https://tidelift.com/subscription/pkg/packagist-slim-slim?utm_source=packagist-slim-slim&utm_medium=referral&utm_campaign=website">Professional support from Tidelift</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8 docs-content">
+                <h1 class="page-header">Middleware</h1>
+                <div class="edit-panel" style="margin: 0 0 1em 0;">
+                    <a href="https://github.com/slimphp/Slim-Website/tree/gh-pages/docs/v4/concepts/middleware.md" target="_blank" class="btn btn-default btn-sm"><i class="fa fa-github"></i> Edit This Page</a>
+                </div>
+                <p>You can run code <em>before</em> and <em>after</em> your Slim application to manipulate the Request and Response objects as you see fit. 
+This is called <em>middleware</em>.
+Why would you want to do this? 
+Perhaps you want to protect your app from cross-site request forgery. 
+Maybe you want to authenticate requests before your app runs. 
+Middleware is perfect for these scenarios.</p>
+
+<h2 id="what-is-middleware">What is middleware?</h2>
+
+<p>Middleware is a layer that sits between the client 
+request and the server response in a web application.
+It intercepts, processes, and potentially alters HTTP requests 
+and responses as they pass through the application pipeline.</p>
+
+<p>A middleware can handle a variety of tasks such as authentication, 
+authorization, logging, request modification, response transformation, 
+error handling, and more.</p>
+
+<p>Each middleware performs its function and then passes control 
+to the next middleware in the chain, enabling a modular and reusable 
+approach to handling cross-cutting concerns in web applications.</p>
+
+<h2 id="how-does-middleware-work">How does middleware work?</h2>
+
+<p>Different frameworks use middleware differently. 
+Slim adds middleware as concentric layers surrounding your core application. 
+Each new middleware layer surrounds any existing middleware layers. 
+The concentric structure expands outwardly as additional middleware layers are added.</p>
+
+<p>The last middleware layer added is the first to be executed.</p>
+
+<p>When you run the Slim application, the Request object traverses the middleware structure from the outside in. 
+They first enter the outermost middleware, then the next outermost middleware, (and so on), until they ultimately arrive at the Slim application itself. 
+After the Slim application dispatches the appropriate route, the resultant Response object exits the Slim application and traverses the middleware structure from the inside out. 
+Ultimately, a final Response object exits the outermost middleware, is serialized into a raw HTTP response, and is returned to the HTTP client. 
+Here’s a diagram that illustrates the middleware process flow:</p>
+
+<div style="padding: 2em 0; text-align: center">
+    <img src="../images/middleware.png" alt="Middleware architecture" style="max-width: 80%;">
+</div>
+
+<h2 id="how-do-i-write-middleware">How do I write middleware?</h2>
+
+<p>Middleware is a callable that accepts two arguments: a <code class="language-plaintext highlighter-rouge">Request</code> object and a <code class="language-plaintext highlighter-rouge">RequestHandler</code> object. 
+Each middleware <strong>MUST</strong> return an instance of  <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseInterface</code>.</p>
+
+<h3 id="closure-middleware">Closure middleware</h3>
+
+<p>This example middleware is a Closure.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$beforeMiddleware</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Example: Check for a specific header before proceeding</span>
+    <span class="nv">$auth</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getHeaderLine</span><span class="p">(</span><span class="s1">'Authorization'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$auth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Short-circuit and return a response immediately</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getResponseFactory</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">createResponse</span><span class="p">();</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Unauthorized'</span><span class="p">);</span>
+        
+        <span class="k">return</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withStatus</span><span class="p">(</span><span class="mi">401</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Proceed with the next middleware</span>
+    <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nv">$afterMiddleware</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Proceed with the next middleware</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    
+    <span class="c1">// Modify the response after the application has processed the request</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">withHeader</span><span class="p">(</span><span class="s1">'X-Added-Header'</span><span class="p">,</span> <span class="s1">'some-value'</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$afterMiddleware</span><span class="p">);</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$beforeMiddleware</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<h3 id="invokable-class-middleware">Invokable class middleware</h3>
+
+<p>This example middleware is an invokable class that implements the magic <code class="language-plaintext highlighter-rouge">__invoke()</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ExampleBeforeMiddleware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// Handle the incoming request</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// Invoke the next middleware and return response</span>
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ExampleAfterMiddleware</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__invoke</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// Invoke the next middleware and get response</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+        <span class="c1">// Handle the outgoing response</span>
+        <span class="c1">// ...</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="psr-15-middleware">PSR-15 middleware</h3>
+
+<p><a href="https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface">PSR-15</a> 
+is a standard that defines common interfaces for HTTP server 
+request handlers and middleware components.</p>
+
+<p>Slim provides built-in support for PSR-15 middleware.</p>
+
+<p><strong>Key Interfaces</strong></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Psr\Http\Server\MiddlewareInterface</code>: This interface defines the <strong>process</strong> method that middleware must implement.</li>
+  <li><code class="language-plaintext highlighter-rouge">Psr\Http\Server\RequestHandlerInterface</code>: An HTTP request handler that process an HTTP request in order to produce an HTTP response.</li>
+</ul>
+
+<p>To create a PSR-15 middleware class, you need to implement the <code class="language-plaintext highlighter-rouge">MiddlewareInterface</code>.</p>
+
+<p>Below is an example of a simple PSR-15 middleware:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">App\Middleware</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\MiddlewareInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ExampleMiddleware</span> <span class="kd">implements</span> <span class="nc">MiddlewareInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">process</span><span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="c1">// Optional: Handle the incoming request</span>
+        <span class="c1">// ...</span>
+
+        <span class="c1">// Invoke the next middleware and get response</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+
+        <span class="c1">// Optional: Handle the outgoing response</span>
+        <span class="c1">// ...</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>Incoming requests can be authenticated, authorized, logged, validated, or modified.</p>
+
+<p>Outgoing responses can be logged, transformed, compressed, or have additional headers added.</p>
+
+<h4 id="creating-a-new-response-in-a-psr-15-middleware">Creating a new response in a PSR-15 middleware</h4>
+
+<p>To create a new response, use the <code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseFactoryInterface</code>, 
+which provides a <code class="language-plaintext highlighter-rouge">createResponse()</code> method to create a new response object.</p>
+
+<p>Here is an example of a PSR-15 middleware class that creates a new response:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseFactoryInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\MiddlewareInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">ExampleMiddleware</span> <span class="kd">implements</span> <span class="nc">MiddlewareInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">ResponseFactoryInterface</span> <span class="nv">$responseFactory</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ResponseFactoryInterface</span> <span class="nv">$responseFactory</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">responseFactory</span> <span class="o">=</span> <span class="nv">$responseFactory</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="n">process</span><span class="p">(</span><span class="kt">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandlerInterface</span> <span class="nv">$handler</span><span class="p">):</span> <span class="kt">ResponseInterface</span>
+    <span class="p">{</span>
+        <span class="c1">// Check some condition to determine if a new response should be created</span>
+        <span class="k">if</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create a new response using the response factory</span>
+            <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">responseFactory</span><span class="o">-&gt;</span><span class="nf">createResponse</span><span class="p">();</span>
+            <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'New response created by middleware'</span><span class="p">);</span>
+            
+            <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Proceed with the next middleware</span>
+        <span class="k">return</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The response is created with a <code class="language-plaintext highlighter-rouge">200</code> OK status code by default.
+To change the HTTP status code, you can pass the desired status 
+code as an argument to the <code class="language-plaintext highlighter-rouge">createResponse</code> method.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">responseFactory</span><span class="o">-&gt;</span><span class="nf">createResponse</span><span class="p">(</span><span class="mi">201</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Note that the response factory is a dependency that must 
+be injected into a middleware. Make sure that the Slim<br>
+DI container (e.g. PHP-DI) is properly configured to provide an instance of
+<code class="language-plaintext highlighter-rouge">Psr\Http\Message\ResponseFactoryInterface</code>.</p>
+
+<p><strong>Example:</strong> PHP-DI definition using the <code class="language-plaintext highlighter-rouge">slim\psr7</code> package</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Psr7\Factory\ResponseFactory</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">return</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="nc">ResponseFactoryInterface</span><span class="o">::</span><span class="n">class</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="nc">ResponseFactory</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">];</span>
+
+</code></pre></div></div>
+
+<p><strong>Example:</strong> PHP-DI definition using the <code class="language-plaintext highlighter-rouge">nyholm/psr7</code> package</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">Nyholm\Psr7\Factory\Psr17Factory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Container\ContainerInterface</span><span class="p">;</span>
+<span class="c1">// ...</span>
+
+<span class="k">return</span> <span class="p">[</span>
+    <span class="c1">// ...</span>
+    <span class="nc">ResponseFactoryInterface</span><span class="o">::</span><span class="n">class</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="kt">ContainerInterface</span> <span class="nv">$container</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$container</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="nc">Psr17Factory</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">];</span>
+
+</code></pre></div></div>
+
+<h3 id="registering-middleware">Registering middleware</h3>
+
+<p>To use a middleware, you need to register each middleware on the Slim <strong>$app</strong>, a route or a route group.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Add middleware to the App</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">ExampleMiddleware</span><span class="p">());</span>
+
+<span class="c1">// Add middleware to the App using dependency injection</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nc">ExampleMiddleware</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+
+<span class="c1">// Add middleware to a route</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span> <span class="mf">...</span> <span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">ExampleMiddleware</span><span class="p">());</span>
+
+<span class="c1">// Add middleware to a route group</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span> <span class="mf">...</span> <span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">ExampleMiddleware</span><span class="p">());</span>
+
+</code></pre></div></div>
+
+<h3 id="middleware-execution-order">Middleware execution order</h3>
+
+<p>Slim processes middleware in a Last In, First Out (LIFO) order. 
+This means the last middleware added is the first one to be executed. 
+If you add multiple middleware components, 
+they will be executed in the reverse order of their addition.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">MiddlewareOne</span><span class="p">());</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">MiddlewareTwo</span><span class="p">());</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">new</span> <span class="nc">MiddlewareThree</span><span class="p">());</span>
+</code></pre></div></div>
+
+<p>In this case, <code class="language-plaintext highlighter-rouge">MiddlewareThree</code> will be executed first, 
+followed by <code class="language-plaintext highlighter-rouge">MiddlewareTwo</code>, and finally <code class="language-plaintext highlighter-rouge">MiddlewareOne</code>.</p>
+
+<h3 id="route-middleware">Route middleware</h3>
+
+<p>Route middleware is invoked <em>only if</em> its route matches the current HTTP request method and URI. 
+Route middleware is specified immediately after you invoke any of the Slim application’s routing methods (e.g., <strong>get()</strong> or <strong>post()</strong>). 
+Each routing method returns an instance of <strong>\Slim\Route</strong>, and this class provides the same middleware interface as the Slim application instance. 
+Add middleware to a Route with the Route instance’s <strong>add()</strong> method. 
+This example adds the Closure middleware example above:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$middleware</span> <span class="o">=</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'World'</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Hello '</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="nv">$middleware</span><span class="p">);</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>This would output this HTTP response body:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello World
+</code></pre></div></div>
+
+<h3 id="group-middleware">Group middleware</h3>
+
+<p>In addition to the overall application, and standard routes being able to accept middleware, the <strong>group()</strong> multi-route definition functionality, also allows individual routes internally. 
+Route group middleware is invoked <em>only if</em> its route matches one of the defined HTTP request methods and URIs from the group. 
+To add middleware within the callback, and entire-group middleware to be set by chaining <strong>add()</strong> after the <strong>group()</strong> method.</p>
+
+<p>Sample Application, making use of callback middleware on a group of url-handlers.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ResponseInterface</span> <span class="k">as</span> <span class="nc">Response</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Message\ServerRequestInterface</span> <span class="k">as</span> <span class="nc">Request</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Psr\Http\Server\RequestHandlerInterface</span> <span class="k">as</span> <span class="nc">RequestHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Factory\AppFactory</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Slim\Routing\RouteCollectorProxy</span><span class="p">;</span>
+
+<span class="k">require</span> <span class="k">__DIR__</span> <span class="mf">.</span> <span class="s1">'/../vendor/autoload.php'</span><span class="p">;</span>
+
+<span class="nv">$app</span> <span class="o">=</span> <span class="nc">AppFactory</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'Hello World'</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">group</span><span class="p">(</span><span class="s1">'/utils'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">RouteCollectorProxy</span> <span class="nv">$group</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/date'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="nb">date</span><span class="p">(</span><span class="s1">'Y-m-d H:i:s'</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">});</span>
+    
+    <span class="nv">$group</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/time'</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">Response</span> <span class="nv">$response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">((</span><span class="n">string</span><span class="p">)</span><span class="nb">time</span><span class="p">());</span>
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="nf">add</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="kt">Request</span> <span class="nv">$request</span><span class="p">,</span> <span class="kt">RequestHandler</span> <span class="nv">$handler</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$handler</span><span class="o">-&gt;</span><span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+    <span class="nv">$dateOrTime</span> <span class="o">=</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">();</span>
+
+    <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">getResponseFactory</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">createResponse</span><span class="p">();</span>
+    <span class="nv">$response</span><span class="o">-&gt;</span><span class="nf">getBody</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">write</span><span class="p">(</span><span class="s1">'It is now '</span> <span class="mf">.</span> <span class="nv">$dateOrTime</span> <span class="mf">.</span> <span class="s1">'. Enjoy!'</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">run</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>When calling the <strong>/utils/date</strong> method, this would output a string similar to the below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>It is now 2015-07-06 03:11:01. Enjoy!
+</code></pre></div></div>
+
+<p>Visiting <strong>/utils/time</strong> would output a string similar to the below.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>It is now 1436148762. Enjoy!
+</code></pre></div></div>
+
+<p>But visiting <strong>/</strong> <em>(domain-root)</em>, would be expected to generate the following output as no middleware has been assigned.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello World
+</code></pre></div></div>
+
+<h3 id="passing-variables-from-middleware">Passing variables from middleware</h3>
+
+<p>The easiest way to pass attributes from middleware is to use the request’s attributes.</p>
+
+<p>Setting the variable in the middleware:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$request</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">withAttribute</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">,</span> <span class="s1">'bar'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Getting the variable in the route callback:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$foo</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="nf">getAttribute</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="finding-available-middleware">Finding available middleware</h2>
+
+<p>You may find a PSR-15 Middleware class already written that will satisfy your needs. 
+Here are a few unofficial lists to search.</p>
+
+<ul>
+  <li><a href="https://github.com/topics/psr-15">Github PSR-15: HTTP Server Request Handlers</a></li>
+  <li><a href="https://github.com/middlewares/awesome-psr15-middlewares">middlewares/awesome-psr15-middlewares</a></li>
+</ul>
+
+
+                <nav>
+                    <ul class="nav pager">
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+                                    
+                                        <li class="previous">
+                                            <a href="value-objects.html" rel="prev"><i class="fa fa-arrow-left"></i> <small>Concepts: </small> PSR-7</a>
+                                        </li>
+                                    
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+                                    <li class="next">
+                                        <a href="di.html" rel="next"><small>Concepts: </small> Dependency Container <i class="fa fa-arrow-right"></i></a>
+                                    </li>
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+                                  
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                            
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+
+                                
+                                
+
+                                
+                                
+
+                                
+
+                                
+                                
+                                
+                            
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <footer class="site-footer">
+    <p>
+        Created and maintained by <br>
+        <a href="http://joshlockhart.com">Josh Lockhart</a>,
+        <a href="https://www.donielsmith.com" target="_blank">Andrew Smith</a>,
+        <a href="http://akrabat.com/" target="_blank">Rob Allen</a>,
+        <a href="http://www.lgse.com/" target="_blank">Pierre Bérubé</a>, and the
+        <a href="https://github.com/orgs/slimphp/people" target="_blank">Slim Framework Team</a>
+    </p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin: 0; padding-top: 20px">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="9YRVXHRZT6H3L">
+        <input type="image" src="../../../en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="../../../en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</footer>
+
+    </div>
+</div>
+        <script src="../../../ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="../../../bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="../../../assets/scripts/build/production.min.js"></script>
+        
+        <script src="../../../npm/docsearch.js%402/dist/cdn/docsearch.min.js"></script>
+        <script>
+          docsearch({
+            apiKey: '8ed5262aecf5240c6d66dbba260f3e51',
+            appId: 'KS0N5YSBFY',
+            indexName: 'slim-docs',
+            inputSelector: '#docsearch',
+            debug: true,
+            transformData: function (suggestions) {
+              for (var i = 0; i < suggestions.length; i++) {
+                var suggestion = suggestions[i];
+
+                var docVersion = null;
+                var urlFragments = suggestion.url.split("/");
+                if (urlFragments.length >= 3 && urlFragments[1] === "docs") {
+                  docVersion = urlFragments[2];
+                }
+
+                if (suggestion.hierarchy.lvl0 === null) {
+                  suggestions[i].hierarchy.lvl0 = docVersion ? "Slim " + docVersion + " - " + suggestion.title : suggestion.title
+                }
+              }
+              return suggestions;
+            },
+          });
+        </script>
+        
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </body>
+</html>
+
