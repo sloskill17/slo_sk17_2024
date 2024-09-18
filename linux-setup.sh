@@ -159,6 +159,7 @@ function12 () {
 
   cd php/webroot
   composer update
+  sudo cp vendor compose.* /var/www/html
   cd ../../node/
   npm install
   cd ../openapi
@@ -170,10 +171,22 @@ function12 () {
   echo 'Done'
 }
 
+## Install Bruno
+# @see https://www.usebruno.com/downloads
+function13 () {
+  sudo mkdir -p /etc/apt/keyrings 
+  sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/bruno.gpg --keyserver keyserver.ubuntu.com --recv-keys 9FA6017ECABE0266 
+
+  echo "deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable" | sudo tee /etc/apt/sources.list.d/bruno.list 
+  
+  sudo apt update 
+  sudo apt install -y bruno=1.29.0
+}
+
 ## Install Zeal Docs
 # @see https://zealdocs.org/download.html
 # Docsets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, MySQL, NodeJS, PHP, PostgreSQL, Typescript
-function13 () {
+function14 () {
   echo 'Installing ZealDocs'
   echo 'Add docets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, MySQL, NodeJS, PHP, PostgreSQL, Typescript'
   sudo apt install -y zeal
@@ -181,12 +194,43 @@ function13 () {
   echo 'Done'
 }
 
+## Install Neovim
+function15 () {
+  sudo apt-get update
+  sudo apt-get -y install ninja-build gettext cmake unzip curl build-essential ripgrep
+
+  git clone https://github.com/neovim/neovim
+  cd neovim && git checkout stable
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+
+  if [ -d ~/.config/nvim ] && [ "$(ls -A ~/.config/nvim)" ]; then
+    echo "A neovim configuration is already present in \"~/.config/nvim\"!"
+    read -p "Do you want to overwrite it? (y/n): " answer
+    if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+      rm -rf ~/.config/nvim
+      git clone "https://github.com/RupertJelnikarMrak/nvim-sloskills-conf.git" ~/.config/nvim
+    else
+      echo "Aborting..."
+      exit 0
+    fi
+  else
+    git clone "https://github.com/RupertJelnikarMrak/nvim-sloskills-conf.git" ~/.config/nvim
+  fi
+
+  echo "Neovim needs to be started for the plugins and lsp servers to be installed."
+  read -p "Do you want to start neovim now? (y/n): " answer
+  if [[ "$answer" == "y" || "$answer" == "Y" ]]; then
+    nvim
+  fi
+}
+
 n=1
 if [ -f $STEP_FILE ]; then
   n=$(cat $STEP_FILE)
 fi
 
-for ((i=n;i<=13;i++))
+for ((i=n;i<=15;i++))
 do
   function$i
   echo "$i" > $STEP_FILE
