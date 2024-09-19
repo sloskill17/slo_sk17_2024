@@ -231,12 +231,17 @@ function16 () {
   unzip vnu.linux.zip
 }
 
+## Install GIMP & shutter
+function17 () {
+  sudo apt install -y gimp shutter
+}
+
 n=1
 if [ -f $STEP_FILE ]; then
   n=$(cat $STEP_FILE)
 fi
 
-for ((i=n;i<=16;i++))
+for ((i=n;i<=17;i++))
 do
   function$i
   echo "$i" > $STEP_FILE
