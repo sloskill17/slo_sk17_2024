@@ -225,12 +225,18 @@ function15 () {
   fi
 }
 
+## Install Neovim
+function16 () {
+  wget https://github.com/validator/validator/releases/download/20.6.30/vnu.linux.zip
+  unzip vnu.linux.zip
+}
+
 n=1
 if [ -f $STEP_FILE ]; then
   n=$(cat $STEP_FILE)
 fi
 
-for ((i=n;i<=15;i++))
+for ((i=n;i<=16;i++))
 do
   function$i
   echo "$i" > $STEP_FILE
