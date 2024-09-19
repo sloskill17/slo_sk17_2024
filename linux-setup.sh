@@ -188,7 +188,7 @@ function13 () {
 # Docsets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, MySQL, NodeJS, PHP, PostgreSQL, Typescript
 function14 () {
   echo 'Installing ZealDocs'
-  echo 'Add docets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, MySQL, NodeJS, PHP, PostgreSQL, Typescript'
+  echo 'Add docets: Apache, Bash, Bootsrap 5, CSS, Express, HTML, JavaScript, jQuery, MySQL, NodeJS, PHP, PostgreSQL, Typescript, SVG'
   sudo apt install -y zeal
   zeal
   echo 'Done'
