@@ -5,7 +5,7 @@
 ### Vzpostavitev okolja
 
 ```bash
-git clone https://github.com/sloskill17/slo_sk17_2024.git
+git clone --recurse-submodules https://github.com/sloskill17/slo_sk17_2024.git
 cd slo_sk17_2024
 ./linux-setup.sh
 # Sledi navodilom

@@ -1,0 +1,6 @@
+[submodule "Modul C/pngjs"]
+	path = Modul C/pngjs
+	url = https://github.com/arian/pngjs.git
+[submodule "Modul C/jsQR"]
+	path = Modul C/jsQR
+	url = https://github.com/cozmo/jsQR.git
