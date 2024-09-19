@@ -4,3 +4,6 @@
 [submodule "Modul C/jsQR"]
 	path = Modul C/jsQR
 	url = https://github.com/cozmo/jsQR.git
+[submodule "Modul C/qrcodejs"]
+	path = Modul C/qrcodejs
+	url = https://github.com/davidshimjs/qrcodejs.git
